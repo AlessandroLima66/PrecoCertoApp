@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ListaDeComprasActivity">
+
+
+    <ImageView
+        android:id="@+id/lista_compras_banner_topo"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/detalhe_produto_nome_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:fontFamily="sans-serif"
+        android:text="Lista de Compras"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lista_compras_banner_topo"
+        app:layout_constraintEnd_toEndOf="@+id/lista_compras_banner_topo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lista_compras_banner_topo"
+        app:layout_constraintTop_toTopOf="@+id/lista_compras_banner_topo" />
+
+    <Button
+        android:id="@+id/lista_compras_botao_adiciona"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/botao_redondo_codigo_de_barras"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/lista_compras_banner_topo"
+        app:layout_constraintEnd_toEndOf="@+id/lista_compras_banner_topo"
+        app:layout_constraintTop_toTopOf="@+id/lista_compras_ListView" />
+
+    <ListView
+        android:id="@+id/lista_compras_ListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/lista_compras_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lista_compras_banner_topo"
+        tools:listitem="@layout/item_compra"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
+
+    <View
+        android:id="@+id/lista_compras_fundo_gradiente_inferior"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/fundo_gradiente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/lista_compras_ListView" />
+
+    <ImageView
+        android:id="@+id/lista_compras_footer"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/lista_compras_icone_total_compra"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:src="@drawable/ic_calculadora"
+        app:layout_constraintBottom_toBottomOf="@id/lista_compras_footer"
+        app:layout_constraintEnd_toStartOf="@id/lista_compras_botao_finalizar_compra"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/lista_compras_footer"
+        app:layout_constraintTop_toTopOf="@id/lista_compras_footer" />
+
+    <TextView
+        android:id="@+id/lista_compras_texto_total_compra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total da compra"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/lista_compras_icone_total_compra"
+        app:layout_constraintTop_toTopOf="@+id/lista_compras_icone_total_compra" />
+
+    <TextView
+        android:id="@+id/lista_compras_valor_total_compra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        tools:text="R$ 300,00"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/lista_compras_texto_total_compra"
+        app:layout_constraintStart_toStartOf="@+id/lista_compras_texto_total_compra"
+        app:layout_constraintTop_toBottomOf="@+id/lista_compras_texto_total_compra" />
+
+    <Button
+        android:id="@+id/lista_compras_botao_finalizar_compra"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/botao_finalizar_compra"
+        app:layout_constraintBottom_toBottomOf="@id/lista_compras_footer"
+        app:layout_constraintEnd_toEndOf="@id/lista_compras_footer"
+        app:layout_constraintTop_toTopOf="@+id/lista_compras_footer" />
+
+</android.support.constraint.ConstraintLayout>

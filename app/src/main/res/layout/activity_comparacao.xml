@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ComparacaoActivity">
+
+    <ImageView
+        android:id="@+id/comparacao_header"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/comparacao_nome_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Comparação de Valores"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/comparacao_header"
+        app:layout_constraintEnd_toEndOf="@+id/comparacao_header"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/comparacao_header"
+        app:layout_constraintTop_toTopOf="@+id/comparacao_header" />
+
+    <ImageView
+        android:id="@+id/comparacao_cabecalho_ListView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_margin="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/teste"
+        app:layout_constraintBottom_toTopOf="@+id/comparacao_ListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comparacao_header" />
+
+    <TextView
+        android:id="@+id/comparacao_texto_compra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Compra"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/comparacao_cabecalho_ListView"
+        app:layout_constraintEnd_toStartOf="@id/comparacao_cabecalho_separador"
+        app:layout_constraintStart_toStartOf="@id/comparacao_cabecalho_ListView"
+        app:layout_constraintTop_toBottomOf="@id/comparacao_cabecalho_ListView"
+        app:layout_constraintTop_toTopOf="@+id/comparacao_cabecalho_ListView" />
+
+    <ImageView
+        android:id="@+id/comparacao_cabecalho_separador"
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/white"
+        app:layout_constraintStart_toStartOf="@id/comparacao_cabecalho_ListView"
+        app:layout_constraintEnd_toEndOf="@id/comparacao_cabecalho_ListView"
+        app:layout_constraintTop_toTopOf="@id/comparacao_cabecalho_ListView"
+        app:layout_constraintBottom_toBottomOf="@id/comparacao_cabecalho_ListView"
+        />
+
+    <TextView
+        android:id="@+id/comparacao_texto_cupom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Cupom"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/comparacao_cabecalho_ListView"
+        app:layout_constraintEnd_toEndOf="@+id/comparacao_cabecalho_ListView"
+        app:layout_constraintStart_toEndOf="@id/comparacao_cabecalho_separador"
+        app:layout_constraintTop_toTopOf="@+id/comparacao_cabecalho_ListView" />
+
+    <ListView
+        android:id="@+id/comparacao_ListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/comparacao_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comparacao_cabecalho_ListView"
+        tools:listitem="@layout/item_comparacao"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
+
+    <ImageView
+        android:id="@+id/comparacao_footer"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@color/colorPrimary" />
+
+</android.support.constraint.ConstraintLayout>

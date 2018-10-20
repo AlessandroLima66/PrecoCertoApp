@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_compra_cardview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="1dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/item_compra_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.80" />
+
+            <TextView
+                android:id="@+id/item_compra_nome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/item_compra_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Biscoito PassaTempo Recheado Chocolate" />
+
+            <TextView
+                android:id="@+id/item_compra_quantidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textSize="14sp"
+                android:textColor="@color/colorSecondaryText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/item_compra_nome"
+                app:layout_constraintTop_toBottomOf="@id/item_compra_nome"
+                tools:text="Quantidade" />
+
+            <TextView
+                android:id="@+id/item_compra_separador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text=" - "
+                android:textColor="@color/colorSecondaryText"
+                app:layout_constraintBottom_toBottomOf="@id/item_compra_quantidade"
+                app:layout_constraintStart_toEndOf="@+id/item_compra_quantidade"
+                app:layout_constraintTop_toBottomOf="@+id/item_compra_nome" />
+
+            <TextView
+                android:id="@+id/item_compra_valor_unitario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                tools:text="Valor"
+                android:textColor="@color/colorSecondaryText"
+                app:layout_constraintBottom_toBottomOf="@id/item_compra_quantidade"
+                app:layout_constraintStart_toEndOf="@+id/item_compra_separador"
+                app:layout_constraintTop_toBottomOf="@+id/item_compra_nome" />
+
+            <ImageView
+                android:id="@+id/item_compra_fundo_valor_total"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/fundo_valor_total_produto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/item_compra_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_compra_valor_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhiteText"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/item_compra_guideline"
+                app:layout_constraintEnd_toEndOf="@id/item_compra_fundo_valor_total"
+                app:layout_constraintBottom_toBottomOf="@id/item_compra_fundo_valor_total"
+                app:layout_constraintTop_toTopOf="@id/item_compra_fundo_valor_total"
+                tools:text="R$ 1,49" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

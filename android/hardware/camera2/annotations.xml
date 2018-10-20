@@ -1,0 +1,5 @@
+<root>
+    <item name='android.hardware.camera2.CameraMetadata LENS_FACING_BACK'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

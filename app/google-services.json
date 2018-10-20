@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "759764849641",
+    "firebase_url": "https://precocertoapp-5cfab.firebaseio.com",
+    "project_id": "precocertoapp-5cfab",
+    "storage_bucket": "precocertoapp-5cfab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759764849641:android:bc7811b3e17c89b2",
+        "android_client_info": {
+          "package_name": "br.com.precocerto.precocertoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759764849641-v99hhauad0pqb8cv2931qe4h2t03chsu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.precocerto.precocertoapp",
+            "certificate_hash": "7ccab9bda28446f1fbfde25659048ce0cf22c134"
+          }
+        },
+        {
+          "client_id": "759764849641-ottenb1kto3b633c5ctp5ludq2sfor69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3z7T6PXdfS2wjiYdqlai_9TceQooP9fk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759764849641-ottenb1kto3b633c5ctp5ludq2sfor69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
