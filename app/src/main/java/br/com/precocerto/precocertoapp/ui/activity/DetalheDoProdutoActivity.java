@@ -1,10 +1,13 @@
 package br.com.precocerto.precocertoapp.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.precocerto.precocertoapp.R;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -29,8 +33,9 @@ import java.util.List;
 
 import br.com.precocerto.precocertoapp.BuildConfig;
 import br.com.precocerto.precocertoapp.dao.ProdutoDAO;
-import br.com.precocerto.precocertoapp.dto.ProdutoSync;
+import br.com.precocerto.precocertoapp.dto.ProdutoMockado;
 import br.com.precocerto.precocertoapp.model.Produto;
+import br.com.precocerto.precocertoapp.model.ProdutoLista;
 import br.com.precocerto.precocertoapp.retrofit.RetrofitInicializador;
 import br.com.precocerto.precocertoapp.util.BitMapUtil;
 import retrofit2.Call;
@@ -63,12 +68,14 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
 
         preparaView();
 
-        Intent intent = getIntent();
-        caminhoFoto = intent.getStringExtra("caminhoDaFoto");
-        bitmapCodigoDeBarras = BitMapUtil.devolveBitmapRotacionado(caminhoFoto);
-        imagem_codigo_barras.setImageBitmap(bitmapCodigoDeBarras);
+//        Intent intent = getIntent();
+//        caminhoFoto = intent.getStringExtra("caminhoDaFoto");
+//        bitmapCodigoDeBarras = BitMapUtil.devolveBitmapRotacionado(caminhoFoto);
+//        imagem_codigo_barras.setImageBitmap(bitmapCodigoDeBarras);
+//        tirarFoto();
+//        runBarcodeRecognition();
 
-        runBarcodeRecognition();
+        getPermissoes();
 
         botao_adicionar_produto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +94,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
         botao_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tiraFoto();
+                tirarFoto();
             }
         });
     }
@@ -103,28 +110,73 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
         botao_procura_produto = findViewById(R.id.detalhe_produto_botao_procurar_produto);
     }
 
+        private void getPermissoes() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            tirarFoto();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    tirarFoto();
+                } else {
+                    Toast.makeText(this, "A permissão de câmera é necessaria", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
 
     private void procuraProduto() {
-        Call<ProdutoSync> call = new RetrofitInicializador().getProdutoService().procuraCodigoDeBarras();
+//        Call<Produto> call = new RetrofitInicializador().getProdutoService().getProduto(codigoDeBarras);
+//
+//        call.enqueue(new Callback<Produto>() {
+//            @Override
+//            public void onResponse(retrofit2.Call<Produto> call, Response<Produto> response) {
+//                Produto produto = response.body();
+//                codigo_de_barras.setText(produto.getCodigoDeBarras());
+//                nome_produto.setText(produto.getNome());
+//            }
+//
+//            @Override
+//            public void onFailure(retrofit2.Call<Produto> call, Throwable t) {
+//                Log.e("onFailure chamado", t.getMessage());
+//                Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
+//            }
+//        });
 
-        call.enqueue(new Callback<ProdutoSync>() {
+        Call<ProdutoMockado> call = new RetrofitInicializador().getProdutoService().produtosMock();
+        call.enqueue(new Callback<ProdutoMockado>() {
             @Override
-            public void onResponse(retrofit2.Call<ProdutoSync> call, Response<ProdutoSync> response) {
-                ProdutoSync produtoSync = response.body();
-                codigo_de_barras.setText(produtoSync.getCodigoDeBarras());
-                nome_produto.setText(produtoSync.getNomeProduto());
+            public void onResponse(Call<ProdutoMockado> call, Response<ProdutoMockado> response) {
+                ProdutoMockado produtoMockado = response.body();
+                List<Produto> produtosMock = produtoMockado.getListaProdutos();
+
+                for(int i = 0; i<produtosMock.size(); i++) {
+                    if (produtosMock.get(i).getCodigoDeBarras().equals("&"+codigoDeBarras))
+                     nome_produto.setText(produtosMock.get(i).getNome());
+                }
+                    Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
+
             }
 
             @Override
-            public void onFailure(retrofit2.Call<ProdutoSync> call, Throwable t) {
+            public void onFailure(Call<ProdutoMockado> call, Throwable t) {
                 Log.e("onFailure chamado", t.getMessage());
-                Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
+               Toast.makeText(DetalheDoProdutoActivity.this,"ERRO",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -164,7 +216,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
         codigo_de_barras.setText(codigoDeBarras);
     }
 
-    private void tiraFoto() {
+    private void tirarFoto() {
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
@@ -209,7 +261,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
 
             valorTotal = valorUnitario * quantidadeProduto;
 
-            Produto produto = new Produto(nomeProduto, codigoDeBarras, quantidadeProduto, valorUnitario, valorTotal, caminhoFoto);
+            ProdutoLista produto = new ProdutoLista(nomeProduto, codigoDeBarras, null, quantidadeProduto, valorUnitario, valorTotal, caminhoFoto);
             ProdutoDAO dao = new ProdutoDAO(this);
             dao.insere(produto);
             dao.close();
@@ -217,5 +269,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
             finish();
         }
     }
+
+
 
 }

@@ -26,7 +26,7 @@ public class BitMapUtil {
     }
 
 
-    public static Bitmap devolveBitmapRotacionado(String caminhoFoto){
+    public static Bitmap devolveBitmapRotacionado(String caminhoFoto) {
         try {
 
             ExifInterface exif = new ExifInterface(caminhoFoto);
@@ -43,6 +43,8 @@ public class BitMapUtil {
                     return rotacionadoBitmap(caminhoFoto, 180);
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     return rotacionadoBitmap(caminhoFoto, 270);
+                default:
+                    return rotacionadoBitmap(caminhoFoto, 0);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,8 +71,7 @@ public class BitMapUtil {
         return null;
     }
 
-    public static Bitmap toGrayscale(Bitmap bmpOriginal)
-    {
+    public static Bitmap toGrayscale(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
         width = bmpOriginal.getWidth();

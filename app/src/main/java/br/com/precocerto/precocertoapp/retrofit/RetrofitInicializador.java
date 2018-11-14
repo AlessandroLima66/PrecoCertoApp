@@ -1,5 +1,8 @@
 package br.com.precocerto.precocertoapp.retrofit;
 
+import br.com.precocerto.precocertoapp.model.Produto;
+import br.com.precocerto.precocertoapp.services.FinalCompraService;
+import br.com.precocerto.precocertoapp.services.ListaDeComprasService;
 import br.com.precocerto.precocertoapp.services.ProdutoService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,4 +32,11 @@ public class RetrofitInicializador {
         return retrofit.create(ProdutoService.class);
     }
 
+    public FinalCompraService getFinalCompraService(){
+        return retrofit.create(FinalCompraService.class);
+    }
+
+    public ListaDeComprasService pegaListaDeCompras(){
+        return retrofit.create(ListaDeComprasService.class);
+    }
 }

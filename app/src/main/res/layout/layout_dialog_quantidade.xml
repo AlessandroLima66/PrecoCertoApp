@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/dialog_quantidade_view"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/dialog_quantidade_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Quantidade"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_quantidade_view"
+        app:layout_constraintStart_toStartOf="@id/dialog_quantidade_view"
+        app:layout_constraintTop_toTopOf="@+id/dialog_quantidade_view" />
+
+    <TextView
+        android:id="@+id/dialog_quantidade_nome_produto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Nome do produto"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_quantidade_view" />
+
+    <com.shawnlin.numberpicker.NumberPicker
+        android:id="@+id/dialog_quantidade_number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_quantidade_nome_produto"
+        app:layout_constraintVertical_bias="0.0"
+        app:np_dividerColor="@color/colorPrimary"
+        app:np_height="60dp"
+        app:np_max="59"
+        app:np_min="1"
+        app:np_orientation="horizontal"
+        app:np_selectedTextColor="@color/colorPrimaryDark"
+        app:np_textColor="@color/colorPrimary"
+        app:np_value="2"
+
+        />
+
+</android.support.constraint.ConstraintLayout>

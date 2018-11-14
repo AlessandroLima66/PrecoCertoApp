@@ -11,45 +11,86 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.45" />
+
+    <ImageView
+        android:id="@+id/informa_cupom_banner_topo"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/informa_cupom_nome_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Cupom Fiscal"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/informa_cupom_banner_topo"
+        app:layout_constraintEnd_toEndOf="@+id/informa_cupom_banner_topo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/informa_cupom_banner_topo"
+        app:layout_constraintTop_toTopOf="@+id/informa_cupom_banner_topo" />
+
+    <View
+        android:id="@+id/informa_cupom_fundo_imagem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/fundo_gradiente"
+        app:layout_constraintBottom_toTopOf="@+id/informa_cupom_guideline_hotizontal_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informa_cupom_banner_topo"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.yalantis.ucrop.view.UCropView
         android:id="@+id/informa_cupom_imagem"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/informa_cupom_guideline_hotizontal_30"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/informa_cupom_fundo_imagem"
+        app:layout_constraintEnd_toEndOf="@+id/informa_cupom_fundo_imagem"
+        app:layout_constraintStart_toStartOf="@+id/informa_cupom_fundo_imagem"
+        app:layout_constraintTop_toTopOf="@+id/informa_cupom_fundo_imagem"
         app:layout_constraintVertical_bias="0.0" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="4dp"
-        android:background="@drawable/fundo_gradiente"
-        app:layout_constraintTop_toBottomOf="@id/informa_cupom_guideline_hotizontal_30" />
+    <Button
+        android:id="@+id/informa_cupom_botao_foto"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/botao_tirar_foto"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/informa_cupom_imagem"
+        app:layout_constraintEnd_toEndOf="@+id/informa_cupom_imagem" />
 
     <ListView
         android:id="@+id/informa_cupom_ListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/informa_cupom_imagem" />
+        app:layout_constraintEnd_toEndOf="@+id/informa_cupom_imagem"
+        app:layout_constraintStart_toStartOf="@+id/informa_cupom_imagem"
+        app:layout_constraintTop_toBottomOf="@+id/informa_cupom_imagem"
+        tools:listitem="@layout/item_finalizar_compra" />
 
     <Button
-        android:id="@+id/informa_cupom_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Comparar"
-        android:background="@drawable/botao_arredondado"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-
+        android:id="@+id/informa_cupom_botao_comparar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/botao_redondo_comparar"
+        app:layout_constraintBottom_toBottomOf="@+id/informa_cupom_banner_topo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/informa_cupom_banner_topo" />
 
 </android.support.constraint.ConstraintLayout>

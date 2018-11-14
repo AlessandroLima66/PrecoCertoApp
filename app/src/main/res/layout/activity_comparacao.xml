@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorPrimaryDark" />
+        app:srcCompat="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/comparacao_nome_activity"
@@ -22,10 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:text="Comparação de Valores"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="Comparação"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="@+id/comparacao_header"
         app:layout_constraintEnd_toEndOf="@+id/comparacao_header"
         app:layout_constraintHorizontal_bias="0.0"
@@ -99,10 +98,19 @@
         android:divider="@null"
         android:dividerHeight="0dp"/>
 
+    <View
+        android:id="@+id/comparacao_fundo_gradiente_inferior"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/fundo_gradiente"
+        app:layout_constraintStart_toStartOf="@id/comparacao_footer"
+        app:layout_constraintEnd_toEndOf="@id/comparacao_footer"
+        app:layout_constraintBottom_toTopOf="@id/comparacao_footer" />
+
     <ImageView
         android:id="@+id/comparacao_footer"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -110,5 +118,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/comparacao_botao_finalizar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_finalizar_brack"
+        app:layout_constraintEnd_toStartOf="@+id/comparacao_botao_comparar"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/comparacao_footer" />
+
+    <TextView
+        android:id="@+id/comparacao_botao_texto_finalizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Finalizar Compra"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/comparacao_botao_finalizar"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/comparacao_botao_finalizar"
+        app:layout_constraintTop_toBottomOf="@+id/comparacao_botao_finalizar" />
+
+    <Button
+        android:id="@+id/comparacao_botao_comparar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_comparar_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/comparacao_footer"
+        app:layout_constraintStart_toEndOf="@+id/comparacao_botao_finalizar"
+        app:layout_constraintTop_toTopOf="@id/comparacao_footer" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Preço Certo</string>
+    <string name="title_activity_localizacao">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

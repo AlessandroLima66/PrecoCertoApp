@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.FinalizarCompraActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/finalizar_compra_guideline_horizontal_80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <ImageView
+        android:id="@+id/finalizar_compra_banner_topo"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_nome_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Finalizar Compra"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/finalizar_compra_banner_topo"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_banner_topo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_banner_topo"
+        app:layout_constraintTop_toTopOf="@+id/finalizar_compra_banner_topo" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_nome_mercado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        tools:text="Super Mercado Padrão"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/finalizar_compra_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_banner_topo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_endereco_mercado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Av. Dr. Vital Brasil, 652 - Butantã São Paulo - SP"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_nome_mercado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_nome_mercado"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_nome_mercado" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="27/10/2018 - 13:29:53"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_endereco_mercado"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_endereco_mercado"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_endereco_mercado" />
+
+    <View
+        android:id="@+id/finalizar_compra_separador_1"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/dotted"
+        android:layerType="software"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_data"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_data"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_data" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_texto_cupom_fiscal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" CUPOM FISCAL ELETRÔNICO - APP PREÇO CERTO"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_separador_1"
+        app:layout_constraintStart_toStartOf="@id/finalizar_compra_separador_1"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_separador_1" />
+
+    <View
+        android:id="@+id/finalizar_compra_separador_2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/dotted"
+        android:layerType="software"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_texto_cupom_fiscal"
+        app:layout_constraintStart_toStartOf="@id/finalizar_compra_texto_cupom_fiscal"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_texto_cupom_fiscal" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_texto_indice"
+        android:layout_width="0dp"
+        android:layout_height="21dp"
+        android:text="# | COD | DESC | QTD | UN | VL UN R$ | VL ITEM R$"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_separador_2"
+        app:layout_constraintStart_toStartOf="@id/finalizar_compra_separador_2"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_separador_2" />
+
+    <View
+        android:id="@+id/finalizar_compra_separador_3"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/dotted"
+        android:layerType="software"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_texto_indice"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_texto_indice"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_texto_indice" />
+
+    <ListView
+        android:id="@+id/finalizar_compra_ListView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        app:layout_constraintBottom_toTopOf="@id/finalizar_compra_guideline_horizontal_80"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_separador_3"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_separador_3"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_separador_3"
+        tools:listitem="@layout/item_finalizar_compra" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_texto_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Total"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/finalizar_compra_total"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/finalizar_compra_ListView"
+        app:layout_constraintTop_toBottomOf="@id/finalizar_compra_guideline_horizontal_80" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_ListView"
+        app:layout_constraintStart_toEndOf="@+id/finalizar_compra_texto_total"
+        app:layout_constraintTop_toTopOf="@+id/finalizar_compra_texto_total"
+        android:text="R$ ---" />
+
+    <View
+        android:id="@+id/finalizar_compra_separador_4"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@drawable/dotted"
+        android:layerType="software"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_ListView"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_ListView"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_texto_total" />
+
+    <View
+        android:id="@+id/finalizar_compra_fundo_gradiente_inferior"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/fundo_gradiente"
+        app:layout_constraintStart_toStartOf="@id/finalizar_compra_footer"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_footer"
+        app:layout_constraintBottom_toTopOf="@id/finalizar_compra_footer" />
+
+    <ImageView
+        android:id="@+id/finalizar_compra_footer"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/finalizar_compra_botao_lista"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_lista_black"
+        android:clickable="true"
+        app:layout_constraintEnd_toStartOf="@+id/finalizar_compra_botao_finalizar"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/finalizar_compra_footer" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_botao_texto_lista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Lista de Compras"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_botao_lista"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_botao_lista"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_botao_lista" />
+
+    <Button
+        android:id="@+id/finalizar_compra_botao_finalizar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_finalizar_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/finalizar_compra_botao_comparar"
+        app:layout_constraintStart_toEndOf="@+id/finalizar_compra_botao_lista"
+        app:layout_constraintTop_toTopOf="@id/finalizar_compra_footer" />
+
+    <Button
+        android:id="@+id/finalizar_compra_botao_comparar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_comparar_black"
+        app:layout_constraintEnd_toEndOf="@id/finalizar_compra_footer"
+        app:layout_constraintStart_toEndOf="@+id/finalizar_compra_botao_finalizar"
+        app:layout_constraintTop_toTopOf="@id/finalizar_compra_footer" />
+
+    <TextView
+        android:id="@+id/finalizar_compra_botao_texto_comparar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Comparar Cupons"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/finalizar_compra_botao_comparar"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/finalizar_compra_botao_comparar"
+        app:layout_constraintTop_toBottomOf="@+id/finalizar_compra_botao_comparar" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

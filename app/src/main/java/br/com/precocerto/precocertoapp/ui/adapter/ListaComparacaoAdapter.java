@@ -2,18 +2,17 @@ package br.com.precocerto.precocertoapp.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.precocerto.precocertoapp.R;
-import br.com.precocerto.precocertoapp.model.ProdutoComparado;
+import br.com.precocerto.precocertoapp.bo.ProdutoComparado;
+import br.com.precocerto.precocertoapp.model.ProdutoCompra;
 import br.com.precocerto.precocertoapp.util.MoedaUtil;
 
 public class ListaComparacaoAdapter extends BaseAdapter {

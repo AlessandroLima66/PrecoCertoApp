@@ -11,15 +11,16 @@ import java.util.List;
 
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.model.Produto;
+import br.com.precocerto.precocertoapp.model.ProdutoCompra;
+import br.com.precocerto.precocertoapp.model.ProdutoLista;
 import br.com.precocerto.precocertoapp.util.MoedaUtil;
 
 public class ListaDeComprasAdapter extends BaseAdapter {
 
-
     private Context context;
-    private List<Produto> produtos;
+    private List<ProdutoLista> produtos;
 
-    public ListaDeComprasAdapter(Context context, List<Produto> produtos) {
+    public ListaDeComprasAdapter(Context context, List<ProdutoLista> produtos) {
         this.context = context;
         this.produtos = produtos;
     }
@@ -45,7 +46,7 @@ public class ListaDeComprasAdapter extends BaseAdapter {
         View viewCriada =  LayoutInflater.from(context)
                 .inflate(R.layout.item_compra, parent,false);
 
-        Produto produto = produtos.get(posicao);
+        ProdutoCompra produto = produtos.get(posicao);
         mostraNome(viewCriada, produto);
         mostraQuantidade(viewCriada, produto);
         mostraValorUnitario(viewCriada, produto);
@@ -59,12 +60,12 @@ public class ListaDeComprasAdapter extends BaseAdapter {
         nome.setText(produto.getNome());
     }
 
-    private void mostraQuantidade(View viewCriada, Produto produto){
+    private void mostraQuantidade(View viewCriada, ProdutoCompra produto){
         TextView quantidade = viewCriada.findViewById(R.id.item_compra_quantidade);
         quantidade.setText(String.valueOf(produto.getQuantidade() + " un"));
     }
 
-    private void mostraValorUnitario(View viewCriada, Produto produto){
+    private void mostraValorUnitario(View viewCriada, ProdutoCompra produto){
         TextView valorUnitario = viewCriada.findViewById(R.id.item_compra_valor_unitario);
 
         String valorUnitarioFormatado = MoedaUtil
@@ -73,7 +74,7 @@ public class ListaDeComprasAdapter extends BaseAdapter {
         valorUnitario.setText(valorUnitarioFormatado);
     }
 
-    private  void mostraValorTotal(View viewCriada, Produto produto){
+    private  void mostraValorTotal(View viewCriada, ProdutoCompra produto){
         TextView valorTotal = viewCriada.findViewById(R.id.item_compra_valor_total);
 
         String valorTotalFormatado = MoedaUtil

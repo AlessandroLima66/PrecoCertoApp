@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.PesquisaProdutosActivity">
+
+    <ImageView
+        android:id="@+id/pesquisa_produto_header"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/pesquisa_produto_nome_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Pesquisa Produtos"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pesquisa_produto_header"
+        app:layout_constraintEnd_toEndOf="@+id/pesquisa_produto_header"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pesquisa_produto_header"
+        app:layout_constraintTop_toTopOf="@+id/pesquisa_produto_header" />
+
+    <AutoCompleteTextView
+        android:id="@+id/pesquisa_produto_autoCompleteTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:hint="Digite o nome do produto"
+        android:maxLines="2"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisa_produto_header" />
+
+    <ListView
+        android:id="@+id/pesquisa_produto_listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/pesquisa_produto_footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisa_produto_autoCompleteTextView"
+        tools:listitem="@layout/item_pesquisa_produto"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        />
+
+    <View
+        android:id="@+id/pesquisa_produto_fundo_gradiente_inferior"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:background="@drawable/fundo_gradiente"
+        app:layout_constraintStart_toStartOf="@id/pesquisa_produto_footer"
+        app:layout_constraintEnd_toEndOf="@id/pesquisa_produto_footer"
+        app:layout_constraintBottom_toTopOf="@id/pesquisa_produto_footer" />
+
+    <ImageView
+        android:id="@+id/pesquisa_produto_footer"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/pesquisa_produto_botao_lista"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_lista_black"
+        app:layout_constraintEnd_toStartOf="@+id/pesquisa_produto_botao_localizar"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pesquisa_produto_footer" />
+
+    <TextView
+        android:id="@+id/pesquisa_produto_botao_texto_lsta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Lista de Compras"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pesquisa_produto_botao_lista"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/pesquisa_produto_botao_lista"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisa_produto_botao_lista" />
+
+    <Button
+        android:id="@+id/pesquisa_produto_botao_localizar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_maps"
+        app:layout_constraintEnd_toEndOf="@id/pesquisa_produto_footer"
+        app:layout_constraintStart_toEndOf="@+id/pesquisa_produto_botao_lista"
+        app:layout_constraintTop_toTopOf="@id/pesquisa_produto_footer" />
+
+    <TextView
+        android:id="@+id/pesquisa_produto_botao_texto_lista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Localizar Produtos"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pesquisa_produto_botao_localizar"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="@+id/pesquisa_produto_botao_localizar"
+        app:layout_constraintTop_toBottomOf="@+id/pesquisa_produto_botao_localizar" />
+
+
+</android.support.constraint.ConstraintLayout>

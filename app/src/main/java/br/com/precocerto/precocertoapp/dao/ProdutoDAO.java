@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.precocerto.precocertoapp.model.Produto;
+import br.com.precocerto.precocertoapp.model.ProdutoCompra;
+import br.com.precocerto.precocertoapp.model.ProdutoLista;
 
 public class ProdutoDAO extends SQLiteOpenHelper{
 
@@ -36,21 +38,21 @@ public class ProdutoDAO extends SQLiteOpenHelper{
 
     }
 
-    public void insere(Produto produto) {
+    public void insere(ProdutoLista produto) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues dados = pegaDadosDoProduto(produto);
         db.insert("Produtos", null, dados);
     }
 
-    public List<Produto> buscaProdutos() {
+    public List<ProdutoLista> buscaProdutos() {
         String sql = "SELECT * from Produtos";
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, null);
 
-        List<Produto> produtos = new ArrayList<>();
+        List<ProdutoLista> produtos = new ArrayList<>();
         while(c.moveToNext()){
-            Produto produto = new Produto();
+            ProdutoLista produto = new ProdutoLista();
             produto.setId(c.getLong(c.getColumnIndex("id")));
             produto.setNome(c.getString(c.getColumnIndex("nome")));
             produto.setCodigoDeBarras(c.getString(c.getColumnIndex("codigoDeBarras")));
@@ -64,13 +66,13 @@ public class ProdutoDAO extends SQLiteOpenHelper{
         return produtos;
     }
 
-    public void deleta(Produto produto) {
+    public void deleta(ProdutoLista produto) {
         SQLiteDatabase db = getWritableDatabase();
         String[] params = {produto.getId().toString()};
         db.delete("Produtos", "id = ?", params);
     }
 
-    public void altera(Produto produto) {
+    public void altera(ProdutoLista produto) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues dados = pegaDadosDoProduto(produto);
@@ -81,7 +83,7 @@ public class ProdutoDAO extends SQLiteOpenHelper{
 
 
     @NonNull
-    private ContentValues pegaDadosDoProduto(Produto produto) {
+    private ContentValues pegaDadosDoProduto(ProdutoLista produto) {
         ContentValues dados = new ContentValues();
         dados.put("nome", produto.getNome());
         dados.put("codigoDeBarras", produto.getCodigoDeBarras());
@@ -90,5 +92,11 @@ public class ProdutoDAO extends SQLiteOpenHelper{
         dados.put("valorTotal", String.valueOf(produto.getValorTotal()));
         dados.put("caminhoFoto", produto.getCaminhoFoto());
         return dados;
+    }
+
+    public void dropAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "DELETE FROM Produtos;";
+        db.execSQL(sql);
     }
 }
