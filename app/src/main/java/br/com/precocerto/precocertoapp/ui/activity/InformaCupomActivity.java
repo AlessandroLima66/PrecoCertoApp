@@ -67,7 +67,7 @@ public class InformaCupomActivity extends AppCompatActivity {
         botao_comparar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!cupom.isEmpty()) {
+                    if(!cupom.isEmpty()){
                     Intent intentComparacao = new Intent(InformaCupomActivity.this, ComparacaoActivity.class);
                     intentComparacao.putExtra("cupom",(Serializable)cupom);
                     startActivityForResult(intentComparacao,666);
@@ -83,10 +83,10 @@ public class InformaCupomActivity extends AppCompatActivity {
                 parseCupomProduto = new ParserCupomFiscal();
                 posicoesOCR.clear();
                 bitmap.recycle();
+                botao_comparar.setVisibility(View.INVISIBLE);
                 tirarFoto();
             }
         });
-
 
         tirarFoto();
     }
@@ -209,7 +209,14 @@ public class InformaCupomActivity extends AppCompatActivity {
 
         marcaPosicaoBitmap(posicoesOCR);
         cupom = parseCupomProduto.parseListaDeProdutos(posicoesOCR);
+        habilitaBotaoComparacao();
         carregaLista();
+    }
+
+    private void habilitaBotaoComparacao() {
+        if (!cupom.isEmpty()){
+            botao_comparar.setVisibility(View.VISIBLE);
+        }
     }
 
     private void marcaPosicaoBitmap(List<CupomPosicaoOCR> cupom) {

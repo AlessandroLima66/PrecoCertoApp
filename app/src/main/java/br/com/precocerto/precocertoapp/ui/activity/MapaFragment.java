@@ -71,8 +71,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         getMapAsync(this);
     }
 
@@ -162,7 +160,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                 posicaoAtual = pegaCoordenadaLatLng();
                 CameraUpdate update = CameraUpdateFactory.newLatLngZoom(posicaoAtual, 13f);
                 GoogleMap.moveCamera(update);
-                setMarcador(posicaoAtual, "Onde Estou", null);
+                setMarcadorHome(posicaoAtual, "Onde Estou");
                 pegaDados();
             }
 
@@ -181,10 +179,19 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         dialogBuilder.setTitle("Atenção");
         dialogBuilder.setIcon(R.drawable.ic_maps);
         dialogBuilder.setMessage("Para mostrar a lista de mercados com o valor da sua compra, precisamos da sua localização.\n\nVocê pode nos ajudar? :)");
-        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+        dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 getPermissoes();
+            }
+        });
+
+        dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Retorna para a antivity anterior
+                getActivity().onBackPressed();
             }
         });
 
@@ -226,14 +233,19 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                 MarkerOptions marcador = new MarkerOptions();
                 marcador.position(coordenada);
                 marcador.title(titulo);
-                if (valorCompra != null) {
-                    marcador.snippet("Total Compra= " + MoedaUtil.formataParaExibicao(valorCompra));
-                    GoogleMap.addMarker(marcador);
-                    return;
-                }else {
-                    GoogleMap.addMarker(marcador).showInfoWindow();
-                }
+                marcador.snippet("Total Compra= " + MoedaUtil.formataParaExibicao(valorCompra));
+                GoogleMap.addMarker(marcador);
             }
+    }
+
+    private void setMarcadorHome(LatLng coordenada, String titulo) {
+        if (coordenada != null) {
+            MarkerOptions marcador = new MarkerOptions();
+            marcador.position(coordenada);
+            marcador.title(titulo);
+            marcador.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_home));
+            GoogleMap.addMarker(marcador).showInfoWindow();
+        }
     }
 
     private LatLng pegaCoordenadaDoEndereco(String endereco) {

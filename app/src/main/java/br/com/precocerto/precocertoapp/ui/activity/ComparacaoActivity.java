@@ -33,9 +33,10 @@ public class ComparacaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comparacao);
 
-        listaCupom = (List<ProdutoLista>) getIntent().getSerializableExtra("cupom");
-        converteParaMap();
-        carregaLista();
+//        listaCupom = (List<ProdutoLista>) getIntent().getSerializableExtra("cupom");
+//        converteParaMap();
+//        carregaLista();
+        mockdados();
         comparaLista();
         exibeLista();
 
@@ -65,27 +66,6 @@ public class ComparacaoActivity extends AppCompatActivity {
         ProdutoDAO dao = new ProdutoDAO(this);
         listaProduto = dao.buscaProdutos();
         dao.close();
-
-        //Cupom 1
-        //listaProduto.add(new Produto("SUCO PO 25G MARACUJA", "7622300861261", Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
-        //listaProduto.add(new Produto("QJ PRATO QUATA FATIADO B", "0000000005042", Integer.valueOf(1), Double.valueOf(24.90), Double.valueOf(4.69), ""));
-        //listaProduto.add(new Produto("BIS LACTA 45G XTRA +CHOC", "7622300988470", Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
-        //listaProduto.add(new Produto("CERV. ITAIPAVA 473ML PILS", "7897395020217", Integer.valueOf(1), Double.valueOf(2.99), Double.valueOf(2.99), ""));
-        //listaProduto.add(new Produto("SUCO POMARIS 100% 300ML", "78988047190227", Integer.valueOf(1), Double.valueOf(1.49), Double.valueOf(1.49), ""));
-
-        //Cupom 2
-//        listaProduto.add(new ProdutoCompra("PAD-PAO FRANCES INTEGRAL", "0000000006328", Integer.valueOf(1), Double.valueOf(17.90), Double.valueOf(7.02)));
-//        listaProduto.add(new ProdutoCompra("BISNAGUINHA PANCO 300G", "7891203010605", Integer.valueOf(1), Double.valueOf(5.49), Double.valueOf(5.49)));
-//        listaProduto.add(new ProdutoCompra("BISC PIRAQUE 300G INTEG", "7896024721358", Integer.valueOf(1), Double.valueOf(3.99), Double.valueOf(3.99)));
-//        listaProduto.add(new ProdutoCompra("LEITE LONG 1L INTEGRAL", "7896183220006", Integer.valueOf(1), Double.valueOf(2.19), Double.valueOf(8.76)));
-//        listaProduto.add(new ProdutoCompra("SUCO POMARIS 100% 300ML", "78988047190227", Integer.valueOf(1), Double.valueOf(1.49), Double.valueOf(1.49)));
-
-
-//        listaProdutoMap.put("7622300861261", new Produto("SUCO PO 25G MARACUJA", "7622300861261", Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
-//        listaProdutoMap.put("0000000005042", new Produto("QJ PRATO QUATA FATIADO B", "0000000005042", Integer.valueOf(1), Double.valueOf(24.90), Double.valueOf(3.69), ""));
-//        listaProdutoMap.put("7622300988470", new Produto("BIS LACTA 45G XTRA +CHOC", "7622300988470", Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
-//        listaProdutoMap.put("7897395020217", new Produto("CERV. ITAIPAVA 473ML PILS", "7897395020217", Integer.valueOf(1), Double.valueOf(2.99), Double.valueOf(2.99), ""));
-//        listaProdutoMap.put("7991025102496", new Produto("IOG DADONE 900G MORANGO", "7991025102496", Integer.valueOf(1), Double.valueOf(5.99), Double.valueOf(5.99), ""));
     }
 
     private void comparaLista() {
@@ -119,5 +99,20 @@ public class ComparacaoActivity extends AppCompatActivity {
         private void exibeLista () {
             ListView listaComparacao = findViewById(R.id.comparacao_ListView);
             listaComparacao.setAdapter(new ListaComparacaoAdapter(this, produtosComparados));
+        }
+
+        private void mockdados (){
+            List<ProdutoLista> produtos = new ArrayList<>();
+            produtos.add(new ProdutoLista("Leite UHT Integral Piracanjuba 1L", "7898215151890", null, Integer.valueOf(12), Double.valueOf(2.49), Double.valueOf(29.88), "" ));
+            produtos.add(new ProdutoLista("Suco em Pó Sabor Maracujá TANG 25g", "7622300861261", null, Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
+            produtos.add(new ProdutoLista("Chocolate Bis Xtra LACTA 45g", "7622300988470", null, Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
+            produtos.add(new ProdutoLista("Cerveja Itaipava Lata 473 ml", "7897395020217",null,  Integer.valueOf(8), Double.valueOf(3.49), Double.valueOf(27.92), ""));
+            produtos.add(new ProdutoLista("Biscoito PassaTempo Nestle Recheado", "7891000051351",null,  Integer.valueOf(1), Double.valueOf(1.39), Double.valueOf(1.39), ""));
+
+            listaCupom = produtos;
+            converteParaMap();
+            produtos.remove(produtos.size() -1);
+            produtos.add(new ProdutoLista("Biscoito PassaTempo Nestle Recheado", "7891000051351",null,  Integer.valueOf(1), Double.valueOf(1.99), Double.valueOf(1.99), ""));
+            listaProduto = produtos;
         }
     }

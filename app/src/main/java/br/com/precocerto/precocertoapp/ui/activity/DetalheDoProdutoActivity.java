@@ -2,6 +2,8 @@ package br.com.precocerto.precocertoapp.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import br.com.precocerto.precocertoapp.R;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -60,6 +63,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
     private Button botao_foto;
     private Button botao_adicionar_produto;
     private Button botao_procura_produto;
+    private AlertDialog dialogCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +71,6 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhe_produto);
 
         preparaView();
-
-//        Intent intent = getIntent();
-//        caminhoFoto = intent.getStringExtra("caminhoDaFoto");
-//        bitmapCodigoDeBarras = BitMapUtil.devolveBitmapRotacionado(caminhoFoto);
-//        imagem_codigo_barras.setImageBitmap(bitmapCodigoDeBarras);
-//        tirarFoto();
-//        runBarcodeRecognition();
-
         getPermissoes();
 
         botao_adicionar_produto.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +106,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
         botao_procura_produto = findViewById(R.id.detalhe_produto_botao_procurar_produto);
     }
 
-        private void getPermissoes() {
+    private void getPermissoes() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             tirarFoto();
@@ -127,11 +123,36 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     tirarFoto();
                 } else {
-                    Toast.makeText(this, "A permissão de câmera é necessaria", Toast.LENGTH_LONG).show();
+                    mostraAlertDialogCamera();
                 }
                 break;
             }
         }
+    }
+
+    private void mostraAlertDialogCamera() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.setTitle("Atenção");
+        dialogBuilder.setIcon(R.drawable.ic_leitor_codigo_barras_2);
+        dialogBuilder.setMessage("Para adicionar produtos, precisamos do acesso a câmera do dispositivo.\n\nVocê pode nos ajudar? :)");
+
+        dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getPermissoes();
+            }
+        });
+
+        dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        dialogCamera = dialogBuilder.create();
+        dialogCamera.show();
     }
 
     @Override
@@ -165,18 +186,19 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
                 ProdutoMockado produtoMockado = response.body();
                 List<Produto> produtosMock = produtoMockado.getListaProdutos();
 
-                for(int i = 0; i<produtosMock.size(); i++) {
-                    if (produtosMock.get(i).getCodigoDeBarras().equals("&"+codigoDeBarras))
-                     nome_produto.setText(produtosMock.get(i).getNome());
+                for (int i = 0; i < produtosMock.size(); i++) {
+                    if (produtosMock.get(i).getCodigoDeBarras().equals("&" + codigoDeBarras)) {
+                        nome_produto.setText(produtosMock.get(i).getNome());
+                        return;
+                    }
                 }
-                    Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
-
+                Toast.makeText(DetalheDoProdutoActivity.this, "Nenhum produto foi encontrato", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<ProdutoMockado> call, Throwable t) {
                 Log.e("onFailure chamado", t.getMessage());
-               Toast.makeText(DetalheDoProdutoActivity.this,"ERRO",Toast.LENGTH_LONG).show();
+                Toast.makeText(DetalheDoProdutoActivity.this, "ERRO", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -210,7 +232,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
             botao_procura_produto.setVisibility(View.VISIBLE);
         } else {
             codigoDeBarras = "Nenhum código foi encontrado";
-            Toast.makeText(this,"Favor tirar outra foto", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Favor tirar outra foto", Toast.LENGTH_LONG).show();
         }
 
         codigo_de_barras.setText(codigoDeBarras);
@@ -241,23 +263,23 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
     }
 
 
-    private void adicionaProduto(){
+    private void adicionaProduto() {
 
         nomeProduto = String.valueOf(nome_produto.getText());
         quantidadeProduto = Integer.valueOf(quantidade_produto.getText().toString());
 
-        if(!String.valueOf(valor_unitario.getText()).equals("")) {
+        if (!String.valueOf(valor_unitario.getText()).equals("")) {
             valorUnitario = Double.valueOf(String.valueOf(valor_unitario.getText()));
-        }else
+        } else
             valorUnitario = null;
 
-        if(codigoDeBarras.equals("Nenhum código foi encontrado")
+        if (codigoDeBarras.equals("Nenhum código foi encontrado")
                 || codigoDeBarras.equals("---")
                 || nomeProduto.equals("---")
-                || valorUnitario == null){
+                || valorUnitario == null) {
 
             Toast.makeText(this, "Favor preencher todos os campos", Toast.LENGTH_LONG).show();
-        }else {
+        } else {
 
             valorTotal = valorUnitario * quantidadeProduto;
 
@@ -269,7 +291,6 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
             finish();
         }
     }
-
 
 
 }

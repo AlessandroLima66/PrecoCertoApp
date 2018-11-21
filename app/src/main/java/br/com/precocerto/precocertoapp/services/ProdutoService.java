@@ -12,6 +12,6 @@ public interface ProdutoService {
     Call<Produto> getProduto(@Query("codigoDeBarras") String codigoDeBarras);
 
 
-    @GET("api/json/get/cgpRwTlWEO?indent=2")
+    @GET("api/json/get/bPynKVortu?indent=2")
     Call<ProdutoMockado> produtosMock();
 }

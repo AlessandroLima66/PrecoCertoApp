@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/dialog_editar_produto_view"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/dialog_editar_produto_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Editar Produto"
+        android:textColor="@color/colorWhiteText"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_editar_produto_view"
+        app:layout_constraintStart_toStartOf="@id/dialog_editar_produto_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/dialog_editar_produto_icon_produto"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ic_produto_1"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_editar_produto_nome_produto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dialog_editar_produto_texto_produto" />
+
+    <TextView
+        android:id="@+id/dialog_editar_produto_texto_produto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Nome do Produto"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_editar_produto_nome_produto"
+        app:layout_constraintStart_toEndOf="@+id/dialog_editar_produto_icon_produto"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_editar_produto_view"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/dialog_editar_produto_nome_produto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:minLines="1"
+        android:text="---"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/dialog_editar_produto_texto_produto"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_editar_produto_texto_produto" />
+
+    <View
+        android:id="@+id/dialog_editar_produto_separador_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_editar_produto_nome_produto" />
+
+    <View
+        android:id="@+id/dialog_editar_produto_icon_quantidade"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ic_quantidade"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_editar_produto_texto_quantidade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dialog_editar_produto_texto_quantidade" />
+
+    <TextView
+        android:id="@+id/dialog_editar_produto_texto_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Quantidade:"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/dialog_editar_produto_icon_quantidade"
+        app:layout_constraintTop_toTopOf="@+id/dialog_editar_produto_separador_1" />
+
+    <EditText
+        android:id="@+id/dialog_editar_produto_quantidade"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:inputType="number"
+        android:text="1"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_editar_produto_texto_quantidade"
+        app:layout_constraintStart_toEndOf="@id/dialog_editar_produto_texto_quantidade"
+        app:layout_constraintTop_toTopOf="@id/dialog_editar_produto_texto_quantidade" />
+
+    <View
+        android:id="@+id/dialog_editar_produto_separador_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_editar_produto_quantidade" />
+
+    <View
+        android:id="@+id/dialog_editar_produto_icon_valor_unitario"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/ic_valor"
+        app:layout_constraintBottom_toBottomOf="@+id/dialog_editar_produto_texto_valor_unitario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dialog_editar_produto_texto_valor_unitario" />
+
+    <TextView
+        android:id="@+id/dialog_editar_produto_texto_valor_unitario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Valor Unitário:"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/dialog_editar_produto_icon_valor_unitario"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_editar_produto_separador_2" />
+
+    <EditText
+        android:id="@+id/dialog_editar_produto_valor_unitario"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="R$ 1.00"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/dialog_editar_produto_texto_valor_unitario"
+        app:layout_constraintStart_toEndOf="@id/dialog_editar_produto_texto_valor_unitario"
+        app:layout_constraintTop_toTopOf="@id/dialog_editar_produto_texto_valor_unitario" />
+
+</android.support.constraint.ConstraintLayout>

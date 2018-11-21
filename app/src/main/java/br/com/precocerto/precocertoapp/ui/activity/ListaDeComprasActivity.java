@@ -1,33 +1,26 @@
 package br.com.precocerto.precocertoapp.ui.activity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
-import com.google.android.gms.location.places.PlaceTypes;
-import com.google.android.gms.location.places.ui.PlacePicker;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.shawnlin.numberpicker.NumberPicker;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-import br.com.precocerto.precocertoapp.BuildConfig;
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.dao.ProdutoDAO;
 import br.com.precocerto.precocertoapp.model.Produto;
@@ -38,8 +31,6 @@ import br.com.precocerto.precocertoapp.util.MoedaUtil;
 
 public class ListaDeComprasActivity extends AppCompatActivity {
 
-    static final int CODIGO_CAMERA = 123;
-
     public static final String MENSAGEM_LISTA_DE_COMPRAS_VAZIA = "Sua lista de compras está vazia!";
     private final CharSequence[] OPCOES_MENU = {"Pesquisar Produtos", "Limpar Lista de Compras"};
     private final String TITLE_DIALOG_MENU = "Menu";
@@ -48,33 +39,37 @@ public class ListaDeComprasActivity extends AppCompatActivity {
     private final String BOTAO_POSITIVO = ("Sim");
     private final String BOTAO_NEGATIVO = ("Não");
 
-    private String caminhoDaFoto;
     private Button botao_adiciona;
     private Button botao_finalizar_compra;
     private Button botao_menu;
     private TextView valor_total_compra;
     private AlertDialog dialogMenu;
     private AlertDialog dialogFinalizar;
+    private SwipeMenuListView listaDeCompras;
     private Double valorTotalCompra = Double.valueOf(0);
+    private  List<ProdutoLista> produtos = new ArrayList<>();
 
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_compras);
 
-        botao_adiciona = findViewById(R.id.lista_compras_botao_adiciona);
+            preparaView();
+//            mock();
+            carregaLista();
+            setSwipe();
+
+
         botao_adiciona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                getPermissoes();
                 Intent resumoProdutos = new Intent(ListaDeComprasActivity.this, DetalheDoProdutoActivity.class);
                 startActivity(resumoProdutos);
 
             }
         });
 
-        botao_finalizar_compra = findViewById(R.id.lista_compras_botao_finalizar_compra);
         botao_finalizar_compra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,13 +77,19 @@ public class ListaDeComprasActivity extends AppCompatActivity {
             }
         });
 
-        botao_menu = findViewById(R.id.lista_compras_botao_menu);
         botao_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mostraAlertDialogMenu();
             }
         });
+    }
+
+    private void preparaView() {
+        botao_adiciona = findViewById(R.id.lista_compras_botao_adiciona);
+        botao_finalizar_compra = findViewById(R.id.lista_compras_botao_finalizar_compra);
+        botao_menu = findViewById(R.id.lista_compras_botao_menu);
+        listaDeCompras = findViewById(R.id.lista_compras_ListView);
     }
 
     private void mostraAlertDialogMenu() {
@@ -144,22 +145,113 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         carregaLista();
     }
 
+
+    private void mock(){
+        produtos.add(new ProdutoLista("Leite UHT Integral Piracanjuba 1L", "7898215151890", null, Integer.valueOf(12), Double.valueOf(2.49), Double.valueOf(29.88), "" ));
+        produtos.add(new ProdutoLista("Suco em Pó Sabor Maracujá TANG 25g", "7622300861261", null, Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
+        produtos.add(new ProdutoLista("Chocolate Bis Xtra LACTA 45g", "7622300988470", null, Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
+        produtos.add(new ProdutoLista("Cerveja Itaipava Lata 473 ml", "7897395020217",null,  Integer.valueOf(8), Double.valueOf(3.49), Double.valueOf(27.92), ""));
+
+        ProdutoDAO dao = new ProdutoDAO(this);
+
+        for (int i = 0; i < produtos.size(); i++){
+            dao.insere(produtos.get(i));
+        }
+
+        dao.close();
+    }
+
     private void carregaLista() {
         ProdutoDAO dao = new ProdutoDAO(this);
-        List<ProdutoLista> produtos = dao.buscaProdutos();
+        produtos = dao.buscaProdutos();
         dao.close();
 
-        ListView listaDeCompras = findViewById(R.id.lista_compras_ListView);
         listaDeCompras.setAdapter(new ListaDeComprasAdapter(this, produtos));
-
         somaTotalDaCompra(produtos);
+    }
+
+    private void setSwipe(){
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem editarItem = new SwipeMenuItem(getApplicationContext());
+                editarItem.setWidth(160);
+                editarItem.setIcon(R.drawable.botao_editar);
+                menu.addMenuItem(editarItem);
+
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+                deleteItem.setWidth(160);
+                deleteItem.setIcon(R.drawable.botao_excluir);
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        listaDeCompras.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
+        listaDeCompras.setMenuCreator(creator);
+        listaDeCompras.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        mostraAlertEditarItem(produtos.get(position));
+                        break;
+                    case 1:
+                        removeProduto(produtos.get(position));
+                        carregaLista();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void mostraAlertEditarItem(final ProdutoLista produto) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = ListaDeComprasActivity.this.getLayoutInflater();
+        View layout = inflater.inflate(R.layout.layout_dialog_editar_produto, null);
+
+        TextView nome_produto = layout.findViewById(R.id.dialog_editar_produto_nome_produto);
+        nome_produto.setText(produto.getNome());
+
+        final EditText produto_quantidade = layout.findViewById(R.id.dialog_editar_produto_quantidade);
+        produto_quantidade.setText(String.valueOf(produto.getQuantidade()));
+
+        final EditText valor_unitario = layout.findViewById(R.id.dialog_editar_produto_valor_unitario);
+        valor_unitario.setText(Double.toString(produto.getValorUnitario()));
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                produto.setQuantidade(Integer.valueOf(produto_quantidade.getText().toString()));
+                produto.setValorUnitario(Double.valueOf(String.valueOf(valor_unitario.getText())));
+                produto.setValorTotal(produto.getQuantidade() * produto.getValorUnitario());
+                alteraProduto(produto);
+                carregaLista();
+            }
+        });
+
+        builder.setView(layout);
+        builder.show();
     }
 
     private void limparLista() {
         if (!(valorTotalCompra.doubleValue() <= 0)) {
             ProdutoDAO dao = new ProdutoDAO(this);
             dao.dropAll();
+            dao.close();
         }
+    }
+
+    private void removeProduto(ProdutoLista produto) {
+        ProdutoDAO dao = new ProdutoDAO(this);
+        dao.deleta(produto);
+        dao.close();
+    }
+
+    private void alteraProduto(ProdutoLista produto) {
+        ProdutoDAO dao = new ProdutoDAO(this);
+        dao.altera(produto);
+        dao.close();
     }
 
     private void somaTotalDaCompra(List<ProdutoLista> produtos) {
@@ -172,56 +264,6 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         valor_total_compra = findViewById(R.id.lista_compras_valor_total_compra);
         String valor = MoedaUtil.formataParaExibicao(valorTotalCompra);
         valor_total_compra.setText(valor);
-    }
-
-//    private void getPermissoes() {
-//        if (ActivityCompat.checkSelfPermission(this,
-//                Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-//
-//            tirarFoto();
-//
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA}, 1);
-//        }
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        switch (requestCode) {
-//            case 1: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    tirarFoto();
-//                } else {
-//                    Toast.makeText(this, "A permissão de câmera é necessaria", Toast.LENGTH_LONG).show();
-//                }
-//                break;
-//            }
-//        }
-//    }
-
-//    private void tirarFoto() {
-//        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        caminhoDaFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-//        File arquivoFoto = new File(caminhoDaFoto);
-//
-//        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT,
-//                FileProvider.getUriForFile(ListaDeComprasActivity.this,
-//                        BuildConfig.APPLICATION_ID + ".provider", arquivoFoto));
-//
-//        startActivityForResult(intentCamera, CODIGO_CAMERA);
-//    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CODIGO_CAMERA) {
-                Intent resumoProdutos = new Intent(ListaDeComprasActivity.this, DetalheDoProdutoActivity.class);
-                resumoProdutos.putExtra("caminhoDaFoto", caminhoDaFoto);
-                startActivity(resumoProdutos);
-            }
-        }
     }
 
 }

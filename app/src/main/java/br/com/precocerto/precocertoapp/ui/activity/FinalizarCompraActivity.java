@@ -96,16 +96,15 @@ public class FinalizarCompraActivity extends AppCompatActivity {
     }
 
     private void carregaLista() {
-        ProdutoDAO dao = new ProdutoDAO(this);
-        List<ProdutoLista> produtos = dao.buscaProdutos();
-        dao.close();
+//        ProdutoDAO dao = new ProdutoDAO(this);
+//        List<ProdutoLista> produtos = dao.buscaProdutos();
+//        dao.close();
 
-//        List<ProdutoCompra> produtos = new ArrayList<>();
-//        produtos.add(new ProdutoCompra("Biscoito PassaTempo Recheado Chocolate 130g", "7896512909787", Integer.valueOf(2), Double.valueOf(1.99), Double.valueOf(3.98)));
-//        produtos.add(new ProdutoCompra("Achocolatado Toddynho 200 ML", "7894321722016", Integer.valueOf(2), Double.valueOf(2.30), Double.valueOf(4.60)));
-//        produtos.add(new ProdutoCompra("Suco Pronto Su Fresh Nectar Abacaxi", "7898192034063", Integer.valueOf(4), Double.valueOf(2.19), Double.valueOf(8.76)));
-//        produtos.add(new ProdutoCompra("Arroz Tipo 1 1kg Camil", "7896006711117",  Integer.valueOf(1), Double.valueOf(2.99), Double.valueOf(2.99)));
-//        produtos.add(new ProdutoCompra("Feijao Camil Preto", "7896006751106",  Integer.valueOf(1), Double.valueOf(4.49), Double.valueOf(4.49)));
+        List<ProdutoLista> produtos = new ArrayList<>();
+        produtos.add(new ProdutoLista("Leite UHT Integral Piracanjuba 1L", "7898215151890", null, Integer.valueOf(12), Double.valueOf(2.49), Double.valueOf(29.88), "" ));
+        produtos.add(new ProdutoLista("Suco em Pó Sabor Maracujá TANG 25g", "7622300861261", null, Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
+        produtos.add(new ProdutoLista("Chocolate Bis Xtra LACTA 45g", "7622300988470", null, Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
+        produtos.add(new ProdutoLista("Cerveja Itaipava Lata 473 ml", "7897395020217",null,  Integer.valueOf(8), Double.valueOf(3.49), Double.valueOf(27.92), ""));
 
         finalCompra.setListaDeCompra(produtos);
 
@@ -170,10 +169,18 @@ public class FinalizarCompraActivity extends AppCompatActivity {
         dialogBuilder.setTitle("Atenção");
         dialogBuilder.setIcon(R.drawable.ic_finalizar_brack);
         dialogBuilder.setMessage("Para finalizar sua compra, precisamos identificar o mercado que você está.\n\nVocê pode nos ajudar? :)");
-        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+        dialogBuilder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 VerificarGPSAtivo();
+            }
+        });
+
+        dialogBuilder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
             }
         });
 
@@ -192,7 +199,6 @@ public class FinalizarCompraActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
     private void VerificarGPSAtivo() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(new LocationRequest());

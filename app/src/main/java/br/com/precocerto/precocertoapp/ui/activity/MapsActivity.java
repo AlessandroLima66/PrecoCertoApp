@@ -37,4 +37,6 @@ public class MapsActivity extends AppCompatActivity {
         fragment.onRequestPermissionsResult(requestCode, permissions,  grantResults);
     }
 
+
+
 }

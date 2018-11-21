@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="@+id/lista_compras_banner_topo"
         app:layout_constraintTop_toTopOf="@+id/lista_compras_ListView" />
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/lista_compras_ListView"
         android:layout_width="0dp"
         android:layout_height="0dp"

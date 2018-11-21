@@ -50,9 +50,6 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
 
         preparaView();
         preparaAutoComplete();
-        mockLista();
-        carregaLista();
-
         registerForContextMenu(pesquisa_produto_listView);
 
         botao_lista.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +77,13 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
                 carregaLista();
             }
         });
+
+        pesquisa_produto_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mostraAlertEditarItem(produtos.get(position));
+            }
+        });
     }
 
     public void fechaKeyboard(Context context, View editText) {
@@ -92,16 +96,7 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final ProdutoCompra produtoCompra = (ProdutoCompra) pesquisa_produto_listView.getItemAtPosition(info.position);
 
-        MenuItem itemEditar = menu.add("Editar");
         MenuItem itemExcluir = menu.add("Excluir");
-
-        itemEditar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                mostraAlertEditarItem(produtoCompra);
-                return false;
-            }
-        });
 
         itemExcluir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -153,17 +148,7 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
     }
 
 
-    private void mockLista() {
-        produtos.add(new ProdutoCompra("Biscoito PassaTempo Recheado Chocolate 130g", "7896512909787", Integer.valueOf(2), Double.valueOf(1.99), Double.valueOf(3.98)));
-        produtos.add(new ProdutoCompra("Achocolatado Toddynho 200 ML", "7894321722016", Integer.valueOf(2), Double.valueOf(2.30), Double.valueOf(4.60)));
-        produtos.add(new ProdutoCompra("Suco Pronto Su Fresh Nectar Abacaxi", "7898192034063", Integer.valueOf(4), Double.valueOf(2.19), Double.valueOf(8.76)));
-        produtos.add(new ProdutoCompra("Arroz Tipo 1 1kg Camil", "7896006711117", Integer.valueOf(1), Double.valueOf(2.99), Double.valueOf(2.99)));
-        produtos.add(new ProdutoCompra("Feijao Camil Preto", "7896006751106", Integer.valueOf(1), Double.valueOf(4.49), Double.valueOf(4.49)));
-
-    }
-
     private void carregaLista() {
-
         pesquisa_produto_listView.setAdapter(new ListaPesquisaProdutosaAdapter(this, produtos));
     }
 }
