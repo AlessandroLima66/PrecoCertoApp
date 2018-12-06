@@ -56,7 +56,7 @@ public class ListaDeComprasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_compras);
 
             preparaView();
-//            mock();
+            //mock();
             carregaLista();
             setSwipe();
 

@@ -27,16 +27,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.dao.ProdutoDAO;
 import br.com.precocerto.precocertoapp.dto.FinalCompra;
-import br.com.precocerto.precocertoapp.model.Produto;
-import br.com.precocerto.precocertoapp.model.ProdutoCompra;
 import br.com.precocerto.precocertoapp.model.ProdutoLista;
 import br.com.precocerto.precocertoapp.retrofit.RetrofitInicializador;
 import br.com.precocerto.precocertoapp.ui.adapter.ListaFinalizarCompraAdapter;
@@ -95,16 +91,10 @@ public class FinalizarCompraActivity extends AppCompatActivity {
         compra_total = findViewById(R.id.finalizar_compra_total);
     }
 
-    private void carregaLista() {
-//        ProdutoDAO dao = new ProdutoDAO(this);
-//        List<ProdutoLista> produtos = dao.buscaProdutos();
-//        dao.close();
-
-        List<ProdutoLista> produtos = new ArrayList<>();
-        produtos.add(new ProdutoLista("Leite UHT Integral Piracanjuba 1L", "7898215151890", null, Integer.valueOf(12), Double.valueOf(2.49), Double.valueOf(29.88), "" ));
-        produtos.add(new ProdutoLista("Suco em Pó Sabor Maracujá TANG 25g", "7622300861261", null, Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
-        produtos.add(new ProdutoLista("Chocolate Bis Xtra LACTA 45g", "7622300988470", null, Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
-        produtos.add(new ProdutoLista("Cerveja Itaipava Lata 473 ml", "7897395020217",null,  Integer.valueOf(8), Double.valueOf(3.49), Double.valueOf(27.92), ""));
+    private void carregaCupom() {
+        ProdutoDAO dao = new ProdutoDAO(this);
+        List<ProdutoLista> produtos = dao.buscaProdutos();
+        dao.close();
 
         finalCompra.setListaDeCompra(produtos);
 
@@ -144,8 +134,8 @@ public class FinalizarCompraActivity extends AppCompatActivity {
                 setNomeMercado();
                 setEnderecoMercado();
                 setHorarioAtual();
-                carregaLista();
-                salvaCompra();
+                carregaCupom();
+                salvaListaDeCompras();
             } else {
                 mostraAlertDialogEnderecoObrigatorio();
             }
@@ -226,7 +216,7 @@ public class FinalizarCompraActivity extends AppCompatActivity {
         });
     }
 
-    private void salvaCompra() {
+    private void salvaListaDeCompras() {
         Call<FinalCompra> call = new RetrofitInicializador().getFinalCompraService().PersisteCompra(finalCompra);
 
         call.enqueue(new Callback<FinalCompra>() {

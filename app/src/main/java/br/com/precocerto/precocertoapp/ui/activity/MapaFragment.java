@@ -13,10 +13,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.telecom.Call;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -27,19 +25,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.PlaceDetectionClient;
-import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +40,6 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.dto.ListaDeCompra;
@@ -66,11 +58,13 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private FusedLocationProviderClient mFusedLocationClient;
     protected Location mLastLocation;
     private LatLng posicaoAtual;
+    private List<ProdutoCompra> listaCompras = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Bundle data = getArguments();
+        listaCompras = (List<ProdutoCompra>) data.getSerializable("ListaCompras");
         getMapAsync(this);
     }
 
@@ -223,12 +217,12 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
             LatLng latLngMercado = pegaCoordenadaDoEndereco(enderecoMercado);
             if (latLngMercado != null) {
-                setMarcador(latLngMercado, nomeMercado, Double.valueOf(0));
+                setMarcadorMercados(latLngMercado, nomeMercado, Double.valueOf(0));
             }
         }
     }
 
-    private void setMarcador(LatLng coordenada, String titulo, Double valorCompra) {
+    private void setMarcadorMercados(LatLng coordenada, String titulo, Double valorCompra) {
             if (coordenada != null) {
                 MarkerOptions marcador = new MarkerOptions();
                 marcador.position(coordenada);
@@ -266,14 +260,15 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     }
 
     private void pegaDados(){
-        List<ProdutoCompra> produtosCompra = new ArrayList<>();
-        produtosCompra.add(new ProdutoCompra("Biscoito PassaTempo Recheado Chocolate 130g", "7896512909787", Integer.valueOf(2), null, null));
-        produtosCompra.add(new ProdutoCompra("Achocolatado Toddynho 200 ML", "7894321722016", Integer.valueOf(2), null, null));
-        produtosCompra.add(new ProdutoCompra("Suco Pronto Su Fresh Nectar Abacaxi", "7898192034063", Integer.valueOf(4), null, null));
-        produtosCompra.add(new ProdutoCompra("Arroz Tipo 1 1kg Camil", "7896006711117",  Integer.valueOf(1), null, null));
-        produtosCompra.add(new ProdutoCompra("Feijao Camil Preto", "7896006751106",  Integer.valueOf(1), null, null));
+        //List<ProdutoCompra> produtosCompra = new ArrayList<>();
+        //produtosCompra.add(new ProdutoCompra("Biscoito PassaTempo Recheado Chocolate 130g", "7896512909787", Integer.valueOf(2), null, null));
+        //produtosCompra.add(new ProdutoCompra("Achocolatado Toddynho 200 ML", "7894321722016", Integer.valueOf(2), null, null));
+        //produtosCompra.add(new ProdutoCompra("Suco Pronto Su Fresh Nectar Abacaxi", "7898192034063", Integer.valueOf(4), null, null));
+        //produtosCompra.add(new ProdutoCompra("Arroz Tipo 1 1kg Camil", "7896006711117",  Integer.valueOf(1), null, null));
+        //produtosCompra.add(new ProdutoCompra("Feijao Camil Preto", "7896006751106",  Integer.valueOf(1), null, null));
 
-        retrofit2.Call<listaDeMercados> call= new RetrofitInicializador().pegaListaDeCompras().getListadeCompras(produtosCompra);
+
+        retrofit2.Call<listaDeMercados> call= new RetrofitInicializador().pegaListaDeCompras().getListadeCompras(listaCompras);
 
         call.enqueue(new Callback<listaDeMercados>() {
             @Override

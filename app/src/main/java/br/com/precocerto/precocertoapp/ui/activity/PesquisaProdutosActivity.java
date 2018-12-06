@@ -17,13 +17,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shawnlin.numberpicker.NumberPicker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.precocerto.precocertoapp.R;
+import br.com.precocerto.precocertoapp.dao.ListaProdutosDAO;
+import br.com.precocerto.precocertoapp.model.Produto;
 import br.com.precocerto.precocertoapp.model.ProdutoCompra;
 import br.com.precocerto.precocertoapp.ui.adapter.ListaPesquisaProdutosaAdapter;
 
@@ -32,15 +36,9 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
     private Button botao_localizar;
     private AutoCompleteTextView produto_autoCompleteTextView;
     private ListView pesquisa_produto_listView;
-    private List<ProdutoCompra> produtos = new ArrayList<>();
-
-    private static final String[] CATEGORIES = new String[]{
-            "Biscoito PassaTempo Recheado Chocolate 130g",
-            "Achocolatado Toddynho 200 ML",
-            "Suco Pronto Su Fresh Nectar Abacaxi",
-            "Arroz Tipo 1 1kg Camil",
-            "Feijao Camil Preto"
-    };
+    private List<ProdutoCompra> listaDeProdutos = new ArrayList<>();
+    private List<Produto> produtos = new ArrayList<>();
+    private List<String> produtoComplete = new ArrayList<>();
 
 
     @Override
@@ -62,8 +60,14 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
         botao_localizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLocalizacao = new Intent(PesquisaProdutosActivity.this, MapsActivity.class);
-                startActivity(intentLocalizacao);
+                if (!listaDeProdutos.isEmpty()) {
+                    Intent intentLocalizacao = new Intent(PesquisaProdutosActivity.this, MapsActivity.class);
+                    intentLocalizacao.putExtra("ListaCompras",(Serializable) listaDeProdutos);
+                    startActivity(intentLocalizacao);
+                }else {
+                    Toast.makeText(PesquisaProdutosActivity.this,"Sua lista de compras está vazia!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -71,9 +75,11 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String text = produto_autoCompleteTextView.getText().toString();
-                produtos.add(new ProdutoCompra(text, "", Integer.valueOf(1), null, null));
+                Produto produtoSelecionado = PesquisaProduto(text);
+
+                listaDeProdutos.add(new ProdutoCompra(produtoSelecionado.getNome(), produtoSelecionado.getCodigoDeBarras(), Integer.valueOf(1), null, null));
                 produto_autoCompleteTextView.setText(null);
-                fechaKeyboard(PesquisaProdutosActivity.this,produto_autoCompleteTextView);
+                fechaKeyboard(PesquisaProdutosActivity.this, produto_autoCompleteTextView);
                 carregaLista();
             }
         });
@@ -81,9 +87,21 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
         pesquisa_produto_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mostraAlertEditarItem(produtos.get(position));
+                mostraAlertEditarItem(listaDeProdutos.get(position));
             }
         });
+    }
+
+    private Produto PesquisaProduto(String texto) {
+        Produto produto = new Produto();
+        for (int i = 0; i < produtos.size();i++){
+            if(produtos.get(i).getNome().equals(texto)){
+                    produto.setNome(produtos.get(i).getNome());
+                    produto.setCodigoDeBarras(produtos.get(i).getCodigoDeBarras());
+                    break;
+            }
+        }
+        return produto;
     }
 
     public void fechaKeyboard(Context context, View editText) {
@@ -101,7 +119,7 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
         itemExcluir.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                produtos.remove(info.position);
+                listaDeProdutos.remove(info.position);
                 carregaLista();
                 return false;
             }
@@ -132,12 +150,26 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
     }
 
     private void preparaAutoComplete() {
+        produtos = new ListaProdutosDAO(this).getlistaProdutos();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, CATEGORIES);
-        AutoCompleteTextView nameTV = (AutoCompleteTextView)
-                findViewById(R.id.pesquisa_produto_autoCompleteTextView);
+                android.R.layout.simple_dropdown_item_1line, getProdutoComplete(produtos));
+        AutoCompleteTextView nameTV = findViewById(R.id.pesquisa_produto_autoCompleteTextView);
 
         nameTV.setAdapter(adapter);
+    }
+
+    private List<String> getProdutoComplete(List<Produto> produtos){
+        for(int i = 0; i < produtos.size(); i++){
+           produtoComplete.add(produtos.get(i).getNome());
+        }
+
+        return produtoComplete;
+    }
+
+    private Produto getProduto(){
+
+        return new Produto();
     }
 
     private void preparaView() {
@@ -149,6 +181,6 @@ public class PesquisaProdutosActivity extends AppCompatActivity {
 
 
     private void carregaLista() {
-        pesquisa_produto_listView.setAdapter(new ListaPesquisaProdutosaAdapter(this, produtos));
+        pesquisa_produto_listView.setAdapter(new ListaPesquisaProdutosaAdapter(this, listaDeProdutos));
     }
 }

@@ -81,7 +81,6 @@ public class ProdutoDAO extends SQLiteOpenHelper{
         db.update("Produtos", dados, "id = ?", params);
     }
 
-
     @NonNull
     private ContentValues pegaDadosDoProduto(ProdutoLista produto) {
         ContentValues dados = new ContentValues();

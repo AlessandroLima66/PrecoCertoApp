@@ -8,14 +8,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.dao.ProdutoDAO;
-import br.com.precocerto.precocertoapp.model.Produto;
 import br.com.precocerto.precocertoapp.bo.ProdutoComparado;
 import br.com.precocerto.precocertoapp.model.ProdutoCompra;
 import br.com.precocerto.precocertoapp.model.ProdutoLista;
@@ -33,12 +31,10 @@ public class ComparacaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comparacao);
 
-//        listaCupom = (List<ProdutoLista>) getIntent().getSerializableExtra("cupom");
-//        converteParaMap();
-//        carregaLista();
-        mockdados();
-        comparaLista();
-        exibeLista();
+        pegaListaDeComprasOCR();
+        pegaListaDeCompra();
+        comparaListas();
+        exibeListaComparacao();
 
         botao_finalizar = findViewById(R.id.comparacao_botao_finalizar);
         botao_finalizar.setOnClickListener(new View.OnClickListener() {
@@ -47,7 +43,11 @@ public class ComparacaoActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
 
+    private void pegaListaDeComprasOCR() {
+        listaCupom = (List<ProdutoLista>) getIntent().getSerializableExtra("cupom");
+        converteParaMap();
     }
 
     private void converteParaMap(){
@@ -62,13 +62,13 @@ public class ComparacaoActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void carregaLista() {
+    private void pegaListaDeCompra() {
         ProdutoDAO dao = new ProdutoDAO(this);
         listaProduto = dao.buscaProdutos();
         dao.close();
     }
 
-    private void comparaLista() {
+    private void comparaListas() {
         ProdutoCompra produtoVazio = new ProdutoCompra("---", "0000000000000", Integer.valueOf(0), Double.valueOf(0), Double.valueOf(0));
         for (int i = 0; i < listaProduto.size(); i++) {
             String codigoDeBarras = listaProduto.get(i).getCodigoDeBarras();
@@ -96,7 +96,7 @@ public class ComparacaoActivity extends AppCompatActivity {
         }
     }
 
-        private void exibeLista () {
+        private void exibeListaComparacao() {
             ListView listaComparacao = findViewById(R.id.comparacao_ListView);
             listaComparacao.setAdapter(new ListaComparacaoAdapter(this, produtosComparados));
         }

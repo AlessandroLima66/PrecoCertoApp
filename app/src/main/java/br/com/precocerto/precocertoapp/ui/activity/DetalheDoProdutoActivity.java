@@ -185,6 +185,7 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
             public void onResponse(Call<ProdutoMockado> call, Response<ProdutoMockado> response) {
                 ProdutoMockado produtoMockado = response.body();
                 List<Produto> produtosMock = produtoMockado.getListaProdutos();
+                produtosMock.add(new Produto("Agua Crystal 1 Litro","&7894900530025"));
 
                 for (int i = 0; i < produtosMock.size(); i++) {
                     if (produtosMock.get(i).getCodigoDeBarras().equals("&" + codigoDeBarras)) {
@@ -259,38 +260,63 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
                 imagem_codigo_barras.setImageBitmap(bitmapCodigoDeBarras);
                 runBarcodeRecognition();
             }
-        }
-    }
-
-
-    private void adicionaProduto() {
-
-        nomeProduto = String.valueOf(nome_produto.getText());
-        quantidadeProduto = Integer.valueOf(quantidade_produto.getText().toString());
-
-        if (!String.valueOf(valor_unitario.getText()).equals("")) {
-            valorUnitario = Double.valueOf(String.valueOf(valor_unitario.getText()));
-        } else
-            valorUnitario = null;
-
-        if (codigoDeBarras.equals("Nenhum código foi encontrado")
-                || codigoDeBarras.equals("---")
-                || nomeProduto.equals("---")
-                || valorUnitario == null) {
-
-            Toast.makeText(this, "Favor preencher todos os campos", Toast.LENGTH_LONG).show();
         } else {
-
-            valorTotal = valorUnitario * quantidadeProduto;
-
-            ProdutoLista produto = new ProdutoLista(nomeProduto, codigoDeBarras, null, quantidadeProduto, valorUnitario, valorTotal, caminhoFoto);
-            ProdutoDAO dao = new ProdutoDAO(this);
-            dao.insere(produto);
-            dao.close();
-
             finish();
         }
     }
 
+    private void adicionaProduto() {
 
+        if (codigoDeBarras.equals("Nenhum código foi encontrado")) {
+            Toast.makeText(DetalheDoProdutoActivity.this, "O campo Código de Barras é obrigatório", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        nomeProduto = String.valueOf(nome_produto.getText());
+        if (nomeProduto.equals("---") | nomeProduto.equals("")) {
+            Toast.makeText(DetalheDoProdutoActivity.this, "O campo Nome do Produto é obrigatório", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        try {
+            quantidadeProduto = Integer.valueOf(quantidade_produto.getText().toString());
+            if (quantidadeProduto <= 0 | quantidadeProduto > 100) {
+                if (quantidadeProduto <= 0) {
+                    Toast.makeText(DetalheDoProdutoActivity.this, "O campo Quantidade deve ser maior que zero", Toast.LENGTH_LONG).show();
+                } else if (quantidadeProduto > 100) {
+                    Toast.makeText(DetalheDoProdutoActivity.this, "O campo Quantidade não deve ser maior que 100", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }catch (NumberFormatException n){
+            Toast.makeText(DetalheDoProdutoActivity.this, "O campo Quantidade deve ser maior que zero", Toast.LENGTH_LONG).show();
+        }
+
+        try {
+            valorUnitario = Double.valueOf(String.valueOf(valor_unitario.getText()));
+            if (valorUnitario <= 0 | valorUnitario > 1000000) {
+                if(valorUnitario <= 0){
+                    Toast.makeText(DetalheDoProdutoActivity.this, "O campo Valor Unitário deve ser maior que 0", Toast.LENGTH_LONG).show();
+                }else
+                    if (valorUnitario > 1000000){
+                        Toast.makeText(DetalheDoProdutoActivity.this, "O campo Valor unitario não deve ser maior que 1000000", Toast.LENGTH_LONG).show();
+                    }
+                    return;
+            }
+        }catch (NumberFormatException n){
+            Toast.makeText(DetalheDoProdutoActivity.this, "O campo Valor Unitario deve ser maior que 0", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        valorTotal = valorUnitario * quantidadeProduto;
+
+        ProdutoLista produto = new ProdutoLista(nomeProduto, codigoDeBarras, null, quantidadeProduto, valorUnitario, valorTotal, caminhoFoto);
+        ProdutoDAO dao = new ProdutoDAO(this);
+        dao.insere(produto);
+        dao.close();
+
+        finish();
+    }
 }

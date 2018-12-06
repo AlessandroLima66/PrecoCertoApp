@@ -45,7 +45,6 @@ import br.com.precocerto.precocertoapp.util.BitMapUtil;
 public class InformaCupomActivity extends AppCompatActivity {
 
     static final int CODIGO_CAMERA = 123;
-    private final int requestMode = 1;
     private List<ProdutoLista> cupom;
     private List<CupomPosicaoOCR> posicoesOCR = new ArrayList<>();
     private ParserCupomFiscal parseCupomProduto = new ParserCupomFiscal();
@@ -79,9 +78,9 @@ public class InformaCupomActivity extends AppCompatActivity {
         botao_foto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cupom.clear();
+                cupom = new ArrayList<>();
                 parseCupomProduto = new ParserCupomFiscal();
-                posicoesOCR.clear();
+                posicoesOCR = new ArrayList<>();
                 bitmap.recycle();
                 botao_comparar.setVisibility(View.INVISIBLE);
                 tirarFoto();
@@ -134,11 +133,6 @@ public class InformaCupomActivity extends AppCompatActivity {
                     final Uri uriTeste = FileProvider.getUriForFile(InformaCupomActivity.this,
                             BuildConfig.APPLICATION_ID + ".provider", arquivoFoto);
                     startCrop(uriTeste);
-                    break;
-
-                case requestMode:
-                    final Uri selectedUri = data.getData();
-                    startCrop(selectedUri);
                     break;
 
                 case UCrop.REQUEST_CROP:
@@ -207,7 +201,7 @@ public class InformaCupomActivity extends AppCompatActivity {
             }
         }
 
-        marcaPosicaoBitmap(posicoesOCR);
+        demarcaTextoBitmap(posicoesOCR);
         cupom = parseCupomProduto.parseListaDeProdutos(posicoesOCR);
         habilitaBotaoComparacao();
         carregaLista();
@@ -219,7 +213,7 @@ public class InformaCupomActivity extends AppCompatActivity {
         }
     }
 
-    private void marcaPosicaoBitmap(List<CupomPosicaoOCR> cupom) {
+    private void demarcaTextoBitmap(List<CupomPosicaoOCR> cupom) {
         final Paint rectPaint = new Paint();
         rectPaint.setColor(Color.RED);
         rectPaint.setStyle(Paint.Style.STROKE);

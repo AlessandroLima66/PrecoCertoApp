@@ -41,7 +41,7 @@ public class ParserCupomFiscal {
     public List<ProdutoLista> parseListaDeProdutos(List<CupomPosicaoOCR> listaOCR) {
         List<ProdutoLista> listaProdutosCupom = new ArrayList<>();
 
-        trataListaOCR(listaOCR);
+        trataPosicoesDoOCR(listaOCR);
 
         if (!itemCupom.isEmpty()) {
             for (int i = 0; i < itemCupom.size(); i++) {
@@ -59,7 +59,7 @@ public class ParserCupomFiscal {
         return listaProdutosCupom;
     }
 
-    private void trataListaOCR(List<CupomPosicaoOCR> listaOCR) {
+    private void trataPosicoesDoOCR(List<CupomPosicaoOCR> listaOCR) {
         /*VERIFICAR E REMOVER ESTE PATTERN DAQUI*/
         Pattern PATTERN = Pattern.compile(".*([0-9iloub]{3,13})", Pattern.CASE_INSENSITIVE);
         Pattern PATTERN0 = Pattern.compile("RS$", Pattern.CASE_INSENSITIVE);
@@ -143,7 +143,7 @@ public class ParserCupomFiscal {
 
     private DecimaisCupom pegaValorUnitarioETotal(String texto, int quantidade) {
         DecimaisCupom decimaisCupom = new DecimaisCupom(Double.valueOf(0), Double.valueOf(0));
-        List<Double> stringDecimais = new ArrayList<>();
+        List<Double> valoresDecimais = new ArrayList<>();
         String valorUnitarioETotal = texto.substring(texto.indexOf("\n") + 1, texto.length());
 
         Matcher matcher = PATTERN_DECIMAIS.matcher(valorUnitarioETotal);
@@ -151,50 +151,55 @@ public class ParserCupomFiscal {
         while (matcher.find()) {
             String valor = matcher.group(0);
             valor = normalizaLetras(valor);
-            stringDecimais.add(devolveDouble(valor));
+            valoresDecimais.add(devolveDouble(valor));
         }
 
-        if (!isUnidadeKG(valorUnitarioETotal)) {
-            if (stringDecimais.size() == 3 && quantidade > 0) {
-                if ((stringDecimais.get(0) * quantidade) == stringDecimais.get(2)) {
-                    decimaisCupom.setValorUnitario(stringDecimais.get(0));
-                    decimaisCupom.setValorTotal(stringDecimais.get(2));
-                }
-            } else if (stringDecimais.size() == 3 && quantidade == 0) {
-                if (stringDecimais.get(2) >= stringDecimais.get(0)) {
-                    decimaisCupom.setValorUnitario(stringDecimais.get(0));
-                    decimaisCupom.setValorTotal(stringDecimais.get(2));
-                }
-            } else if (stringDecimais.size() == 2 && quantidade > 0) {
-                if (stringDecimais.get(0) >= stringDecimais.get(1)) {
-                    decimaisCupom.setValorUnitario(stringDecimais.get(0));
-                    decimaisCupom.setValorTotal(stringDecimais.get(0) * quantidade);
-                } else if ((stringDecimais.get(1) / quantidade) == stringDecimais.get(0)) {
-                    decimaisCupom.setValorUnitario(stringDecimais.get(1) / quantidade);
-                    decimaisCupom.setValorTotal(stringDecimais.get(1));
-                }
-            } else if (stringDecimais.size() == 2 && quantidade == 0) {
-                if (stringDecimais.get(0).equals(stringDecimais.get(1))) {
-                    decimaisCupom.setValorUnitario(stringDecimais.get(0));
-                    decimaisCupom.setValorTotal(stringDecimais.get(1));
-                }
-            }
-            return decimaisCupom;
+        identificaValorUnitarioETotal(valoresDecimais, quantidade, valorUnitarioETotal, decimaisCupom );
 
-        } else if (stringDecimais.size() == 4) {
-            Double total = multiplicaDoubleComPrecisao(stringDecimais.get(0), stringDecimais.get(1));
-            if (total.equals(stringDecimais.get(3))) {
-                decimaisCupom.setValorUnitario(stringDecimais.get(1));
-                decimaisCupom.setValorTotal(total);
-            }
-        } else if (stringDecimais.size() == 3) {
-            Double total = multiplicaDoubleComPrecisao(stringDecimais.get(0), stringDecimais.get(1));
-            if (total.equals(stringDecimais.get(2))) {
-                decimaisCupom.setValorUnitario(stringDecimais.get(1));
-                decimaisCupom.setValorTotal(total);
-            }
-        }
         return decimaisCupom;
+    }
+
+    private void identificaValorUnitarioETotal(List<Double> valoresDecimais, int quantidade, String valorUnitarioETotal, DecimaisCupom decimaisCupom) {
+        if (!isUnidadeKG(valorUnitarioETotal)) {
+            if (valoresDecimais.size() == 3 && quantidade > 0) {
+                if ((valoresDecimais.get(0) * quantidade) == valoresDecimais.get(2)) {
+                    decimaisCupom.setValorUnitario(valoresDecimais.get(0));
+                    decimaisCupom.setValorTotal(valoresDecimais.get(2));
+                }
+            } else if (valoresDecimais.size() == 3 && quantidade == 0) {
+                if (valoresDecimais.get(2) >= valoresDecimais.get(0)) {
+                    decimaisCupom.setValorUnitario(valoresDecimais.get(0));
+                    decimaisCupom.setValorTotal(valoresDecimais.get(2));
+                }
+            } else if (valoresDecimais.size() == 2 && quantidade > 0) {
+                if (valoresDecimais.get(0) >= valoresDecimais.get(1)) {
+                    decimaisCupom.setValorUnitario(valoresDecimais.get(0));
+                    decimaisCupom.setValorTotal(valoresDecimais.get(0) * quantidade);
+                } else if ((valoresDecimais.get(1) / quantidade) == valoresDecimais.get(0)) {
+                    decimaisCupom.setValorUnitario(valoresDecimais.get(1) / quantidade);
+                    decimaisCupom.setValorTotal(valoresDecimais.get(1));
+                }
+            } else if (valoresDecimais.size() == 2 && quantidade == 0) {
+                if (valoresDecimais.get(0).equals(valoresDecimais.get(1))) {
+                    decimaisCupom.setValorUnitario(valoresDecimais.get(0));
+                    decimaisCupom.setValorTotal(valoresDecimais.get(1));
+                }
+            }
+            return;
+
+        } else if (valoresDecimais.size() == 4) {
+            Double total = multiplicaDoubleComPrecisao(valoresDecimais.get(0), valoresDecimais.get(1));
+            if (total.equals(valoresDecimais.get(3))) {
+                decimaisCupom.setValorUnitario(valoresDecimais.get(1));
+                decimaisCupom.setValorTotal(total);
+            }
+        } else if (valoresDecimais.size() == 3) {
+            Double total = multiplicaDoubleComPrecisao(valoresDecimais.get(0), valoresDecimais.get(1));
+            if (total.equals(valoresDecimais.get(2))) {
+                decimaisCupom.setValorUnitario(valoresDecimais.get(1));
+                decimaisCupom.setValorTotal(total);
+            }
+        }
     }
 
     private boolean isUnidadeKG(String valorUnitarioETotal) {

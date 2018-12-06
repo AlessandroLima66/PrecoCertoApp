@@ -1,0 +1,25 @@
+{
+  "listaProdutos":[
+    {
+      "codigoDeBarras":"7896512909787",
+      "nome":"Biscoito PassaTempo Recheado Chocolate 130g"
+    },
+    {
+      "codigoDeBarras":"7894321722016",
+      "nome":"Achocolatado Toddynho 200 ML"
+    },
+    {
+      "codigoDeBarras":"7898192034063",
+      "nome":"Suco Pronto Su Fresh Nectar Abacaxi"
+    },
+    {
+      "codigoDeBarras":"7896006711117",
+      "nome":"Arroz Tipo 1 1kg Camil"
+    },
+    {
+      "codigoDeBarras":"7896006751106",
+      "nome":"Feijao Camil Preto"
+    }
+  ]
+
+}

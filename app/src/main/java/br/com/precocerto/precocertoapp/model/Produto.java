@@ -30,5 +30,4 @@ public class Produto implements Serializable {
     public void setCodigoDeBarras(String codigoDeBarras) {
         this.codigoDeBarras = codigoDeBarras;
     }
-
 }
