@@ -1,25 +1,300 @@
 {
   "listaProdutos":[
     {
-      "codigoDeBarras":"7896512909787",
-      "nome":"Biscoito PassaTempo Recheado Chocolate 130g"
+      "nome":"AZEITE EXTRA VIRGEM 500ML PORTO VALENCIA",
+      "codigoDeBarras":"8437001170678"
     },
     {
-      "codigoDeBarras":"7894321722016",
-      "nome":"Achocolatado Toddynho 200 ML"
+      "nome":"AZEITE EXTRA VIRGEM 500ML PORTO VALENCIA",
+      "codigoDeBarras":"8437001170678"
     },
     {
-      "codigoDeBarras":"7898192034063",
-      "nome":"Suco Pronto Su Fresh Nectar Abacaxi"
+      "nome":"AZEITE EXTRA VIRGEM 500ML TRADIÇÃO",
+      "codigoDeBarras":"7898919754366"
     },
     {
-      "codigoDeBarras":"7896006711117",
-      "nome":"Arroz Tipo 1 1kg Camil"
+      "nome":"AZEITE COMPOSTO 500ML MARIA",
+      "codigoDeBarras":"7896036092934"
     },
     {
-      "codigoDeBarras":"7896006751106",
-      "nome":"Feijao Camil Preto"
+      "nome":"LEITE BATAVO SACO ",
+      "codigoDeBarras":"7891097013386"
+    },
+    {
+      "nome":"LEITE LONGA VIDA BASE INTEGRAL CAIXA 12",
+      "codigoDeBarras":"7898215151906"
+    },
+    {
+      "nome":"COALHADA VIGOR",
+      "codigoDeBarras":"7891999410207"
+    },
+    {
+      "nome":"QUEIJO RALADO TIROLEZ",
+      "codigoDeBarras":"7896030520648"
+    },
+    {
+      "nome":"CREME RICOTA POLENGHI LEVE",
+      "codigoDeBarras":"7891143017009"
+    },
+    {
+      "nome":"BISCOITO TORTUGUITA RECHEADO BRIGADEIRO 130G ARCOR",
+      "codigoDeBarras":"7896058256222"
+    },
+    {
+      "nome":"BISCOITO MANTEIGA TEMPERADA 156G CLUB SOCIAL",
+      "codigoDeBarras":"7622300871055"
+    },
+    {
+      "nome":"BISCOITO CREAM CRACKER TRADICIONAL 400G ESTRELA",
+      "codigoDeBarras":"7896264601182"
+    },
+    {
+      "nome":"BOLACHA PASSATEMPO 150G NESTLE",
+      "codigoDeBarras":"7891000116418"
+    },
+    {
+      "nome":"BISCOITO CHOCOLATE 144G OREO",
+      "codigoDeBarras":"7622300873509"
+    },
+    {
+      "nome":"MISTURA PARA BOLO FLORESTA NEGRA 450G DONA BENTA",
+      "codigoDeBarras":"7896005216941"
+    },
+    {
+      "nome":"SALGADINHO DORITOS QUEIJO NACHO 55G ELMA CHIPS",
+      "codigoDeBarras":"7892840253745"
+    },
+    {
+      "nome":"SALGADINHO CHEETOS REQUEIJÃO 57G ELMA CHIPS",
+      "codigoDeBarras":"7892840252946"
+    },
+    {
+      "nome":"PRINGLES ORIGINAL | PRINGLES ORIGINAL 150G",
+      "codigoDeBarras":"5410076602384"
+    },
+    {
+      "nome":"MACARRAO INSTANTANEO CUP NOODLES BOLONHESA 72G TALHARIM",
+      "codigoDeBarras":"7891079012703"
+    },
+    {
+      "nome":"HAMBURGUER BOVINO UNIDADE 90G FRIBOI",
+      "codigoDeBarras":"7898542022917"
+    },
+    {
+      "nome":"LEITE CONDENSADO MOÇA LATA NESTLÉ 395G",
+      "codigoDeBarras":"7891000100103"
+    },
+    {
+      "nome":"SUCO DEL VALLE MAIS LARANJA 1LT",
+      "codigoDeBarras":"7898164662010"
+    },
+    {
+      "nome":"LEITE EM PÓ NINHO INSTANTÂNEO",
+      "codigoDeBarras":"7891000142202"
+    },
+    {
+      "nome":"ISOTÔNICO SABOR MORANGO E MARACUJÁ GATORADE 500ML",
+      "codigoDeBarras":"7892840808174"
+    },
+    {
+      "nome":"EXTRATO DE TOMATE ELEFANTE",
+      "codigoDeBarras":"7896036094983"
+    },
+    {
+      "nome":"MARGARINA CREMOSA COM SAL POTE - 500G - QUALY",
+      "codigoDeBarras":"7893000394209"
+    },
+    {
+      "nome":"SABONETE EM BARRA DOVE ORIGINAL 90G",
+      "codigoDeBarras":"7898422746759"
+    },
+    {
+      "nome":"FAROFA PRONTA DE MANDIOCA YOKI",
+      "codigoDeBarras":"7891095300488"
+    },
+    {
+      "nome":"FARINHA DE ROSCA YOKI 500 GR",
+      "codigoDeBarras":"7891095003426"
+    },
+    {
+      "nome":"MUCILON ARROZ",
+      "codigoDeBarras":"7891000012109"
+    },
+    {
+      "nome":"CHOCOLATE PRESTIGIO NESTLE 33 G",
+      "codigoDeBarras":"7891000460207"
+    },
+    {
+      "nome":"REFRIGERANTE FANTA LARANJA 2LT",
+      "codigoDeBarras":"7894900031515"
+    },
+    {
+      "nome":"VINAGRE BRANCO CASTELO",
+      "codigoDeBarras":"7896048284778"
+    },
+    {
+      "nome":"CREME DE CEBOLA MAGGI 68G",
+      "codigoDeBarras":"7891000538500"
+    },
+    {
+      "nome":"ACHOCOLOATADO DANETTE 200ML",
+      "codigoDeBarras":"7891025021117"
+    },
+    {
+      "nome":"AMACIANTE DE CARNES MAGGI 120G",
+      "codigoDeBarras":"7891000502303"
+    },
+    {
+      "nome":"BISCOITO DE LEITE REGULAR PASSATEMPO NELTLÉ 150G",
+      "codigoDeBarras":"7891000051436"
+    },
+    {
+      "nome":"BATATA SENSAÇÕES PEITO PERU",
+      "codigoDeBarras":"7892840215217"
+    },
+    {
+      "nome":"CREME DE LEITE LATA NESTLÉ 300G",
+      "codigoDeBarras":"7891000120101"
+    },
+    {
+      "nome":"H2OH! LIMÃO GARRAFA PET 1,5L",
+      "codigoDeBarras":"7892840812416"
+    },
+    {
+      "nome":"OLEO DE SOJA VELEIRO 20/1",
+      "codigoDeBarras":"7898247780075"
+    },
+    {
+      "nome":"REFRIGERANTE COCA-COLA 2,5LT",
+      "codigoDeBarras":"7894900011593"
+    },
+    {
+      "nome":"BEBIDA ENERGÉTICA BURN 260ML",
+      "codigoDeBarras":"7894900401103"
+    },
+    {
+      "nome":"RUM BACARDI BIG APPLE",
+      "codigoDeBarras":"7891125064502"
+    },
+    {
+      "nome":"TODINHO BRIGADEIRO",
+      "codigoDeBarras":"7894321722160"
+    },
+    {
+      "nome":"KIMILHO FLOCAO",
+      "codigoDeBarras":"7891095006878"
+    },
+    {
+      "nome":"SALSICHA HOT DOG SADIA 500G",
+      "codigoDeBarras":"7893000135529"
+    },
+    {
+      "nome":"SONHO DE VALSA LACTA PACOTE",
+      "codigoDeBarras":"7896019602419"
+    },
+    {
+      "nome":"CANJICA AMARELA YOKI 500 GR",
+      "codigoDeBarras":"7891095100118"
+    },
+    {
+      "nome":"PÓ PARA CHANTILLY YOKI",
+      "codigoDeBarras":"7891095009985"
+    },
+    {
+      "nome":"AMANDITA LACTA CAIXA",
+      "codigoDeBarras":"7896019607636"
+    },
+    {
+      "nome":"FERMENTO EM PÓ QUÍMICO ROYAL 250G",
+      "codigoDeBarras":"7622300119652"
+    },
+    {
+      "nome":"MACARRÃO INSTANTÂNEO MIOJO LÁMEN GALINHA NISSIN 85G",
+      "codigoDeBarras":"7891079000212"
+    },
+    {
+      "nome":"DIAMANTE NEGRO LACTA",
+      "codigoDeBarras":"7896019352710"
+    },
+    {
+      "nome":"ATUM COQUEIRO SÓLIDO EM ÓLEO",
+      "codigoDeBarras":"7894321821108"
+    },
+    {
+      "nome":"KETCHUP HELLMANNS TRADICIONAL SQUEEZE 380G",
+      "codigoDeBarras":"7891150027848"
+    },
+    {
+      "nome":"KRAFT FOODS TRAKINAS CHOCOLATE 154 G",
+      "codigoDeBarras":"7622300741013"
+    },
+    {
+      "nome":"ERVILHA PREDILECTA R",
+      "codigoDeBarras":"7896292300545"
+    },
+    {
+      "nome":"PAO DE MEL PANCO",
+      "codigoDeBarras":"7891203021304"
+    },
+    {
+      "nome":"CHAMYTO C 6",
+      "codigoDeBarras":"7891000070444"
+    },
+    {
+      "nome":"PATE DE PRESUNTO SADIA",
+      "codigoDeBarras":"7893000004757"
+    },
+    {
+      "nome":"PATE DE ATUM COQ. TRADICIONAL",
+      "codigoDeBarras":"7894321841014"
+    },
+    {
+      "nome":"NESTLÉ BANANA COM AVEIA",
+      "codigoDeBarras":"7891000049020"
+    },
+    {
+      "nome":"CAFÉ SOLÚVEL NESCAFÉ TRADIÇÃO NESTLÉ 100G",
+      "codigoDeBarras":"7891000029329"
+    },
+    {
+      "nome":"MORTADELA 400G PERDIGAO",
+      "codigoDeBarras":"7891515430153"
+    },
+    {
+      "nome":"SABONETE EM BARRA USO DIÁRIO PALMOLIVE 90G LANONILA E ÓLEO DE AMENDIA UNIT",
+      "codigoDeBarras":"7891024112304"
+    },
+    {
+      "nome":"ÓLEO PURO JOHNSONS BABY",
+      "codigoDeBarras":"7891010877613"
+    },
+    {
+      "nome":"DESODORANTE ANTITRANSPIRANTE AEROSOL REXONA WOMEN COTTON 175ML",
+      "codigoDeBarras":"7791293784465"
+    },
+    {
+      "nome":"SABONETE EM BARRA INFANTIL JOHNSON JOHNSON 80G GLICERINA MEL E VITAMINAS UNIT",
+      "codigoDeBarras":"7891010035976"
+    },
+    {
+      "nome":"PROTETOR SOLAR SUNDOWN",
+      "codigoDeBarras":"7891010033521"
+    },
+    {
+      "nome":"CURATIVO BAND AID TRANSPARENTE 40 UNIDADE",
+      "codigoDeBarras":"7891010505448"
+    },
+    {
+      "nome":"BISCOITO PASSATEMPO RECHEADO CHOCOLATE 130G",
+      "codigoDeBarras":"7896512909787"
+    },
+    {
+      "nome":"ACHOCOLATADO TODDYNHO 200 ML",
+      "codigoDeBarras":"7894321722016"
+    },
+    {
+      "nome":"SUCO PRONTO SU FRESH NECTAR ABACAXI",
+      "codigoDeBarras":"7898192034063"
     }
   ]
-
 }
