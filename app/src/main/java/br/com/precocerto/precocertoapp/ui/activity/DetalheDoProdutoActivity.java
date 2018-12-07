@@ -36,6 +36,7 @@ import java.util.List;
 
 import br.com.precocerto.precocertoapp.BuildConfig;
 import br.com.precocerto.precocertoapp.dao.ProdutoDAO;
+import br.com.precocerto.precocertoapp.dto.ProdutoDTO;
 import br.com.precocerto.precocertoapp.dto.ProdutoMockado;
 import br.com.precocerto.precocertoapp.model.Produto;
 import br.com.precocerto.precocertoapp.model.ProdutoLista;
@@ -162,47 +163,28 @@ public class DetalheDoProdutoActivity extends AppCompatActivity {
 
 
     private void procuraProduto() {
-//        Call<Produto> call = new RetrofitInicializador().getProdutoService().getProduto(codigoDeBarras);
-//
-//        call.enqueue(new Callback<Produto>() {
-//            @Override
-//            public void onResponse(retrofit2.Call<Produto> call, Response<Produto> response) {
-//                Produto produto = response.body();
-//                codigo_de_barras.setText(produto.getCodigoDeBarras());
-//                nome_produto.setText(produto.getNome());
-//            }
-//
-//            @Override
-//            public void onFailure(retrofit2.Call<Produto> call, Throwable t) {
-//                Log.e("onFailure chamado", t.getMessage());
-//                Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
-//            }
-//        });
+        Call<ProdutoDTO> call = new RetrofitInicializador().getProdutoService().getProduto(codigoDeBarras);
 
-        Call<ProdutoMockado> call = new RetrofitInicializador().getProdutoService().produtosMock();
-        call.enqueue(new Callback<ProdutoMockado>() {
+        call.enqueue(new Callback<ProdutoDTO>() {
             @Override
-            public void onResponse(Call<ProdutoMockado> call, Response<ProdutoMockado> response) {
-                ProdutoMockado produtoMockado = response.body();
-                List<Produto> produtosMock = produtoMockado.getListaProdutos();
-                produtosMock.add(new Produto("Agua Crystal 1 Litro","&7894900530025"));
-
-                for (int i = 0; i < produtosMock.size(); i++) {
-                    if (produtosMock.get(i).getCodigoDeBarras().equals("&" + codigoDeBarras)) {
-                        nome_produto.setText(produtosMock.get(i).getNome());
-                        return;
-                    }
+            public void onResponse(retrofit2.Call<ProdutoDTO> call, Response<ProdutoDTO> response) {
+                if(response.code() == 200) {
+                    ProdutoDTO produto = response.body();
+                    codigo_de_barras.setText(produto.getCodigoDeBarras());
+                    nome_produto.setText(produto.getNomeProduto());
+                }else{
+                    Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(DetalheDoProdutoActivity.this, "Nenhum produto foi encontrato", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<ProdutoMockado> call, Throwable t) {
+            public void onFailure(retrofit2.Call<ProdutoDTO> call, Throwable t) {
                 Log.e("onFailure chamado", t.getMessage());
-                Toast.makeText(DetalheDoProdutoActivity.this, "ERRO", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetalheDoProdutoActivity.this,"Nenhum produto foi encontrato",Toast.LENGTH_LONG).show();
             }
         });
     }
+
 
     private void runBarcodeRecognition() {
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmapCodigoDeBarras);

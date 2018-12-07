@@ -13,9 +13,6 @@ import retrofit2.http.POST;
 
 public interface ListaDeComprasService {
 
-//    @POST("listacompras")
-//    Call<List<ListaMercados>> getListadeCompras(@Body List<ProdutoCompra> listaDeCompras);
-
-    @POST("api/json/get/cpFEQQrbYi?indent=2")
+    @POST("recomendacao")
     Call<listaDeMercados> getListadeCompras(@Body List<ProdutoCompra> listaDeCompras);
 }

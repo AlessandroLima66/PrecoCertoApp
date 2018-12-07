@@ -1,26 +1,26 @@
-package br.com.precocerto.precocertoapp.model;
+package br.com.precocerto.precocertoapp.dto;
 
-import java.io.Serializable;
+import br.com.precocerto.precocertoapp.model.Produto;
 
-public class Produto implements Serializable {
+public class ProdutoDTO {
     private String nomeProduto;
     private String codigoDeBarras;
 
 
-    public Produto(){
+    public ProdutoDTO(){
     }
 
-    public Produto(String nomeProduto, String codigoDeBarras) {
+    public ProdutoDTO(String nomeProduto, String codigoDeBarras) {
         this.nomeProduto = nomeProduto;
         this.codigoDeBarras = codigoDeBarras;
     }
 
-    public String getNome() {
+    public String getNomeProduto() {
         return nomeProduto;
     }
 
-    public void setNome(String nome) {
-        this.nomeProduto = nome;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
     public String getCodigoDeBarras() {

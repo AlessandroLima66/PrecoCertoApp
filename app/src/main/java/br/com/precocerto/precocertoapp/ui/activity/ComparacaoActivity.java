@@ -100,19 +100,4 @@ public class ComparacaoActivity extends AppCompatActivity {
             ListView listaComparacao = findViewById(R.id.comparacao_ListView);
             listaComparacao.setAdapter(new ListaComparacaoAdapter(this, produtosComparados));
         }
-
-        private void mockdados (){
-            List<ProdutoLista> produtos = new ArrayList<>();
-            produtos.add(new ProdutoLista("Leite UHT Integral Piracanjuba 1L", "7898215151890", null, Integer.valueOf(12), Double.valueOf(2.49), Double.valueOf(29.88), "" ));
-            produtos.add(new ProdutoLista("Suco em Pó Sabor Maracujá TANG 25g", "7622300861261", null, Integer.valueOf(1), Double.valueOf(0.99), Double.valueOf(0.99), ""));
-            produtos.add(new ProdutoLista("Chocolate Bis Xtra LACTA 45g", "7622300988470", null, Integer.valueOf(1), Double.valueOf(2.49), Double.valueOf(2.49), ""));
-            produtos.add(new ProdutoLista("Cerveja Itaipava Lata 473 ml", "7897395020217",null,  Integer.valueOf(8), Double.valueOf(3.49), Double.valueOf(27.92), ""));
-            produtos.add(new ProdutoLista("Biscoito PassaTempo Nestle Recheado", "7891000051351",null,  Integer.valueOf(1), Double.valueOf(1.39), Double.valueOf(1.39), ""));
-
-            listaCupom = produtos;
-            converteParaMap();
-            produtos.remove(produtos.size() -1);
-            produtos.add(new ProdutoLista("Biscoito PassaTempo Nestle Recheado", "7891000051351",null,  Integer.valueOf(1), Double.valueOf(1.99), Double.valueOf(1.99), ""));
-            listaProduto = produtos;
-        }
     }

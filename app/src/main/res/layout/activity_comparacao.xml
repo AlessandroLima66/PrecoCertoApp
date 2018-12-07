@@ -37,7 +37,8 @@
         android:layout_height="30dp"
         android:layout_margin="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/teste"
+
+        android:background="@drawable/fundo_titulo"
         app:layout_constraintBottom_toTopOf="@+id/comparacao_ListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

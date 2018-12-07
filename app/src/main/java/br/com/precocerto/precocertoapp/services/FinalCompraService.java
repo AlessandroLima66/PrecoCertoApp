@@ -8,6 +8,6 @@ import retrofit2.http.PUT;
 
 public interface FinalCompraService {
 
-    @PUT("produtos")
+    @POST("salvarProduto")
     Call<FinalCompra> PersisteCompra(@Body FinalCompra finalCompra);
 }

@@ -214,13 +214,23 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         for (int i = 0; i < listaComprasMercados.size();i++ ){
             String enderecoMercado = listaComprasMercados.get(i).getEnderecoMercado();
             String nomeMercado = listaComprasMercados.get(i).getNomeMercado();
+            Double valor = valorTotalPorMercado(listaComprasMercados.get(i).getListaDeCompra());
 
             LatLng latLngMercado = pegaCoordenadaDoEndereco(enderecoMercado);
             if (latLngMercado != null) {
-                setMarcadorMercados(latLngMercado, nomeMercado, Double.valueOf(0));
+                setMarcadorMercados(latLngMercado, nomeMercado, valor);
             }
         }
     }
+
+    private Double valorTotalPorMercado(List<ProdutoCompra> listaDeCompra) {
+        Double total = Double.valueOf(0);
+        for (int i = 0; i < listaDeCompra.size();i++){
+            total += listaDeCompra.get(i).getValorTotal();
+        }
+        return total;
+    }
+
 
     private void setMarcadorMercados(LatLng coordenada, String titulo, Double valorCompra) {
             if (coordenada != null) {
@@ -260,14 +270,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     }
 
     private void pegaDados(){
-        //List<ProdutoCompra> produtosCompra = new ArrayList<>();
-        //produtosCompra.add(new ProdutoCompra("Biscoito PassaTempo Recheado Chocolate 130g", "7896512909787", Integer.valueOf(2), null, null));
-        //produtosCompra.add(new ProdutoCompra("Achocolatado Toddynho 200 ML", "7894321722016", Integer.valueOf(2), null, null));
-        //produtosCompra.add(new ProdutoCompra("Suco Pronto Su Fresh Nectar Abacaxi", "7898192034063", Integer.valueOf(4), null, null));
-        //produtosCompra.add(new ProdutoCompra("Arroz Tipo 1 1kg Camil", "7896006711117",  Integer.valueOf(1), null, null));
-        //produtosCompra.add(new ProdutoCompra("Feijao Camil Preto", "7896006751106",  Integer.valueOf(1), null, null));
-
-
         retrofit2.Call<listaDeMercados> call= new RetrofitInicializador().pegaListaDeCompras().getListadeCompras(listaCompras);
 
         call.enqueue(new Callback<listaDeMercados>() {

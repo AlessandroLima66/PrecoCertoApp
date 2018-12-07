@@ -20,9 +20,8 @@ public class RetrofitInicializador {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addInterceptor(interceptor);
 
-        //.baseUrl("http://192.168.1.32:8080/api/")
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.json-generator.com/")
+                .baseUrl("http://192.168.25.50:8080/")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(client.build())
                 .build();

@@ -1,6 +1,5 @@
 package br.com.precocerto.precocertoapp.ui.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import br.com.precocerto.precocertoapp.R;
 import br.com.precocerto.precocertoapp.model.ProdutoCompra;
-import br.com.precocerto.precocertoapp.model.ProdutoLista;
 
 public class MapsActivity extends AppCompatActivity {
 

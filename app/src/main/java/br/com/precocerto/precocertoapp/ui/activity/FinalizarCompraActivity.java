@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -222,12 +223,12 @@ public class FinalizarCompraActivity extends AppCompatActivity {
         call.enqueue(new Callback<FinalCompra>() {
             @Override
             public void onResponse(Call<FinalCompra> call, Response<FinalCompra> response) {
-                //Logal Sucesso
+//                Toast.makeText(FinalizarCompraActivity.this, "onResponse= " + response.code(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<FinalCompra> call, Throwable t) {
-                //Logar Erro
+//                Toast.makeText(FinalizarCompraActivity.this, "ERRO", Toast.LENGTH_LONG).show();
             }
         });
     }
